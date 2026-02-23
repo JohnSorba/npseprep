@@ -82,3 +82,31 @@ This project consists of a React frontend and a Node.js/Express backend.
 - `POST /api/admin/topics` – Create topic (admin only)
 - `GET /api/admin/stats` – Platform statistics (admin only)
 
+```markdown
+## Technologies Used
+
+### Frontend
+- **React** (Vite)
+- **Tailwind CSS** for styling
+- **Framer Motion** for animations
+- **Lucide React** for iconography
+- **React Router** for navigation
+- **Axios** for API requests
+
+### Backend
+- **Node.js & Express**
+- **PostgreSQL** with `pg` pool
+- **JSON Web Tokens (JWT)** for authentication
+- **Joi** for schema validation
+- **Bcrypt** for password hashing
+
+## Future Roadmap
+- [ ] **Timed Mock Exams** – Full-length simulated exam experience with automatic timing
+- [ ] **Leaderboard** – Global ranking system for students
+- [ ] **AI Tutor** – Integration for explaining difficult concepts
+- [ ] **Mobile App** – Native mobile version using React Native or PWA support
+
+## License
+
+This project is licensed under the MIT License.
+```

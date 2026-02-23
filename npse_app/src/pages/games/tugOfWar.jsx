@@ -424,8 +424,17 @@ export default function TugOfWar() {
                 </div>
             </div>
 
-            {/* Game layout: Arena full-width top, teams side-by-side below */}
+            {/* Game layout — all 3 children are direct grid items for CSS reordering */}
             <div className="tow-game-layout">
+                <TeamPanel
+                    team="blue"
+                    score={p1Score}
+                    question={p1Question}
+                    onAnswer={(label) => handleAnswer(1, label)}
+                    disabled={phase === 'finished'}
+                    feedback={p1Feedback}
+                />
+
                 <Arena
                     position={ropePosition}
                     winner={winner}
@@ -434,24 +443,14 @@ export default function TugOfWar() {
                     timer={timer}
                 />
 
-                <div className="tow-teams-row">
-                    <TeamPanel
-                        team="blue"
-                        score={p1Score}
-                        question={p1Question}
-                        onAnswer={(label) => handleAnswer(1, label)}
-                        disabled={phase === 'finished'}
-                        feedback={p1Feedback}
-                    />
-                    <TeamPanel
-                        team="red"
-                        score={p2Score}
-                        question={p2Question}
-                        onAnswer={(label) => handleAnswer(2, label)}
-                        disabled={phase === 'finished'}
-                        feedback={p2Feedback}
-                    />
-                </div>
+                <TeamPanel
+                    team="red"
+                    score={p2Score}
+                    question={p2Question}
+                    onAnswer={(label) => handleAnswer(2, label)}
+                    disabled={phase === 'finished'}
+                    feedback={p2Feedback}
+                />
             </div>
 
             {/* End-game buttons */}
