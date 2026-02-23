@@ -1,0 +1,899 @@
+/* =========================================================
+   NPSE Prep — Payment & Store Styles
+   Covers: Donate, Store, Payment Status pages
+   ========================================================= */
+
+/* ── Common Variables ──────────────────────────────────────── */
+:root {
+    --pay-primary: #2563eb;
+    --pay-primary-hover: #1d4ed8;
+    --pay-primary-light: #eff6ff;
+    --pay-success: #059669;
+    --pay-success-light: #ecfdf5;
+    --pay-warning: #d97706;
+    --pay-warning-light: #fffbeb;
+    --pay-danger: #dc2626;
+    --pay-danger-light: #fef2f2;
+    --pay-gray-50: #f9fafb;
+    --pay-gray-100: #f3f4f6;
+    --pay-gray-200: #e5e7eb;
+    --pay-gray-300: #d1d5db;
+    --pay-gray-500: #6b7280;
+    --pay-gray-700: #374151;
+    --pay-gray-900: #111827;
+    --pay-radius: 16px;
+    --pay-radius-sm: 10px;
+    --pay-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    --pay-shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.1);
+    --pay-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* =====================================================
+   DONATE PAGE
+   ===================================================== */
+
+.donate-page {
+    min-height: 100vh;
+    background: var(--pay-gray-50);
+}
+
+/* Hero */
+.donate-hero {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+    padding: 80px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.donate-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5l5 10 10 2-7 7 2 10-10-5-10 5 2-10-7-7 10-2z' fill='%23ffffff' fill-opacity='0.08'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+.donate-hero-content {
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.donate-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 6px 18px;
+    border-radius: 24px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.donate-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.donate-hero p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+/* Main Section */
+.donate-main {
+    padding: 48px 24px 80px;
+}
+
+.donate-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Impact Section */
+.donate-impact h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--pay-gray-900);
+    margin-bottom: 24px;
+}
+
+.impact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.impact-card {
+    background: #fff;
+    border-radius: var(--pay-radius);
+    padding: 24px;
+    text-align: center;
+    box-shadow: var(--pay-shadow);
+    transition: transform var(--pay-transition), box-shadow var(--pay-transition);
+}
+
+.impact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--pay-shadow-lg);
+}
+
+.impact-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.impact-number {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--pay-primary);
+    margin-bottom: 4px;
+}
+
+.impact-label {
+    font-size: 0.85rem;
+    color: var(--pay-gray-500);
+    font-weight: 500;
+}
+
+/* Donation Form */
+.donate-form-wrapper {
+    position: sticky;
+    top: 100px;
+}
+
+.donate-form {
+    background: #fff;
+    border-radius: var(--pay-radius);
+    padding: 36px;
+    box-shadow: var(--pay-shadow-lg);
+    border: 1px solid var(--pay-gray-200);
+}
+
+.donate-form h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--pay-gray-900);
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--pay-gray-700);
+    margin-bottom: 8px;
+}
+
+.amount-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.amount-btn {
+    padding: 14px 8px;
+    border: 2px solid var(--pay-gray-200);
+    border-radius: var(--pay-radius-sm);
+    background: #fff;
+    color: var(--pay-gray-700);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--pay-transition);
+}
+
+.amount-btn:hover {
+    border-color: var(--pay-primary);
+    color: var(--pay-primary);
+    background: var(--pay-primary-light);
+}
+
+.amount-btn.active {
+    border-color: var(--pay-primary);
+    background: var(--pay-primary);
+    color: #fff;
+    transform: scale(1.02);
+}
+
+.amount-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--pay-gray-200);
+    border-radius: var(--pay-radius-sm);
+    overflow: hidden;
+    transition: border-color var(--pay-transition);
+}
+
+.amount-input-wrapper:focus-within {
+    border-color: var(--pay-primary);
+}
+
+.currency-label {
+    padding: 12px 16px;
+    background: var(--pay-gray-100);
+    color: var(--pay-gray-700);
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-right: 2px solid var(--pay-gray-200);
+}
+
+.amount-input {
+    flex: 1;
+    border: none;
+    padding: 12px 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    outline: none;
+    background: transparent;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--pay-gray-200);
+    border-radius: var(--pay-radius-sm);
+    font-size: 0.95rem;
+    color: var(--pay-gray-700);
+    outline: none;
+    transition: border-color var(--pay-transition);
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: var(--pay-primary);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.donate-error {
+    background: var(--pay-danger-light);
+    color: var(--pay-danger);
+    padding: 12px 16px;
+    border-radius: var(--pay-radius-sm);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.donate-submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    border: none;
+    border-radius: var(--pay-radius-sm);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--pay-transition);
+    letter-spacing: 0.02em;
+}
+
+.donate-submit-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #d97706, #b45309);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(217, 119, 6, 0.35);
+}
+
+.donate-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.donate-secure-note {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--pay-gray-500);
+    margin-top: 16px;
+}
+
+/* =====================================================
+   STORE PAGE
+   ===================================================== */
+
+.store-page {
+    min-height: 100vh;
+    background: var(--pay-gray-50);
+}
+
+.store-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 16px;
+    color: var(--pay-gray-500);
+}
+
+.store-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--pay-gray-200);
+    border-top-color: var(--pay-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Store Hero */
+.store-hero {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%);
+    padding: 80px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.store-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='3' fill='%23ffffff' fill-opacity='0.06'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+.store-hero-content {
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.store-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 6px 18px;
+    border-radius: 24px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.store-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+}
+
+.store-hero p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+}
+
+/* Filter Bar */
+.store-filters {
+    padding: 24px;
+    background: #fff;
+    border-bottom: 1px solid var(--pay-gray-200);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.filter-bar {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--pay-gray-200);
+    border-radius: 50px;
+    background: #fff;
+    color: var(--pay-gray-700);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--pay-transition);
+}
+
+.filter-btn:hover {
+    border-color: var(--pay-primary);
+    color: var(--pay-primary);
+}
+
+.filter-btn.active {
+    background: var(--pay-primary);
+    border-color: var(--pay-primary);
+    color: #fff;
+}
+
+/* Products Grid */
+.store-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+}
+
+.store-error {
+    background: var(--pay-danger-light);
+    color: var(--pay-danger);
+    padding: 14px 20px;
+    border-radius: var(--pay-radius-sm);
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
+.store-empty {
+    text-align: center;
+    padding: 80px 24px;
+    color: var(--pay-gray-500);
+    font-size: 1.1rem;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: var(--pay-radius);
+    border: 1px solid var(--pay-gray-200);
+    box-shadow: var(--pay-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform var(--pay-transition), box-shadow var(--pay-transition);
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--pay-shadow-lg);
+}
+
+.product-card-header {
+    padding: 20px 24px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.product-type-badge {
+    display: inline-block;
+    background: var(--pay-primary-light);
+    color: var(--pay-primary);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.product-popular-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.product-card-body {
+    padding: 20px 24px;
+    flex: 1;
+}
+
+.product-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--pay-gray-900);
+    margin-bottom: 10px;
+}
+
+.product-description {
+    font-size: 0.9rem;
+    color: var(--pay-gray-500);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.product-features {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.feature {
+    font-size: 0.875rem;
+    color: var(--pay-success);
+    font-weight: 500;
+}
+
+.product-card-footer {
+    padding: 20px 24px;
+    border-top: 1px solid var(--pay-gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.product-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.price-currency {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--pay-gray-500);
+}
+
+.price-amount {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--pay-gray-900);
+}
+
+.purchase-btn {
+    padding: 12px 28px;
+    background: var(--pay-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--pay-radius-sm);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--pay-transition);
+    white-space: nowrap;
+}
+
+.purchase-btn:hover:not(:disabled) {
+    background: var(--pay-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+
+.purchase-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Trust Section */
+.store-trust {
+    background: #fff;
+    border-top: 1px solid var(--pay-gray-200);
+    padding: 40px 24px;
+}
+
+.trust-items {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--pay-gray-700);
+}
+
+.trust-icon {
+    font-size: 1.5rem;
+}
+
+
+/* =====================================================
+   PAYMENT STATUS PAGE
+   ===================================================== */
+
+.payment-status-page {
+    min-height: 100vh;
+    background: var(--pay-gray-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+}
+
+.status-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    color: var(--pay-gray-500);
+}
+
+.status-loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--pay-gray-200);
+    border-top-color: var(--pay-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.payment-status-container {
+    width: 100%;
+    max-width: 560px;
+}
+
+.status-card {
+    background: #fff;
+    border-radius: var(--pay-radius);
+    padding: 48px 36px;
+    text-align: center;
+    box-shadow: var(--pay-shadow-lg);
+    border: 1px solid var(--pay-gray-200);
+}
+
+.status-icon-wrapper {
+    margin-bottom: 20px;
+}
+
+.status-icon {
+    font-size: 4rem;
+    display: inline-block;
+    animation: statusBounce 0.6s ease-out;
+}
+
+@keyframes statusBounce {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.status-card.status-success {
+    border-top: 4px solid var(--pay-success);
+}
+
+.status-card.status-pending {
+    border-top: 4px solid var(--pay-warning);
+}
+
+.status-card.status-failed {
+    border-top: 4px solid var(--pay-danger);
+}
+
+.status-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--pay-gray-900);
+    margin-bottom: 12px;
+}
+
+.status-subtitle {
+    font-size: 1rem;
+    color: var(--pay-gray-500);
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.status-details {
+    background: var(--pay-gray-50);
+    border-radius: var(--pay-radius-sm);
+    padding: 20px;
+    margin-bottom: 28px;
+    text-align: left;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--pay-gray-200);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-size: 0.85rem;
+    color: var(--pay-gray-500);
+    font-weight: 500;
+}
+
+.detail-value {
+    font-size: 0.9rem;
+    color: var(--pay-gray-900);
+    font-weight: 700;
+    word-break: break-all;
+    text-align: right;
+    max-width: 60%;
+}
+
+.status-error {
+    color: var(--pay-danger);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+
+.status-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.status-action-btn {
+    padding: 14px 28px;
+    border-radius: var(--pay-radius-sm);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--pay-transition);
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+}
+
+.status-action-btn.primary {
+    background: var(--pay-primary);
+    color: #fff;
+}
+
+.status-action-btn.primary:hover {
+    background: var(--pay-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+
+.status-action-btn.secondary {
+    background: var(--pay-gray-100);
+    color: var(--pay-gray-700);
+}
+
+.status-action-btn.secondary:hover {
+    background: var(--pay-gray-200);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 768px) {
+    .donate-hero {
+        padding: 60px 16px 40px;
+    }
+
+    .donate-hero h1,
+    .store-hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .donate-container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .donate-form-wrapper {
+        position: static;
+    }
+
+    .donate-form {
+        padding: 24px;
+    }
+
+    .amount-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .impact-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .store-hero {
+        padding: 60px 16px 40px;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-bar {
+        gap: 8px;
+    }
+
+    .filter-btn {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+    }
+
+    .trust-items {
+        gap: 20px;
+    }
+
+    .trust-item {
+        font-size: 0.85rem;
+    }
+
+    .status-card {
+        padding: 32px 20px;
+    }
+
+    .status-title {
+        font-size: 1.4rem;
+    }
+
+    .status-icon {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .amount-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product-card-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .product-price {
+        justify-content: center;
+    }
+
+    .purchase-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
