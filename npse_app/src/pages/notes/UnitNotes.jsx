@@ -260,7 +260,7 @@ const UnitNotes = () => {
     return (
         <>
             {/* Page Header */}
-            <section className="page-header" style={{ '--subject-color': subject.color }}>
+            <section className="page-hero">
                 <div className="container">
                     <div className="breadcrumbs" style={{ color: 'rgba(255,255,255,0.7)' }}>
                         <Link to="/" style={{ color: 'rgba(255,255,255,0.7)' }}>Home</Link>
@@ -271,6 +271,7 @@ const UnitNotes = () => {
                         <span>›</span>
                         <span style={{ color: 'white' }}>Unit {unit.unitNumber}</span>
                     </div>
+                    <p className="platform-section__eyebrow" style={{ color: 'rgba(255,255,255,0.5)' }}>Study Notes</p>
                     <span className="badge badge-secondary" style={{ marginBottom: 'var(--space-3)' }}>
                         {subject.icon} {subject.name}
                     </span>

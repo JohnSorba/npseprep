@@ -3106,8 +3106,8 @@ p {
 
 /* ========== PAGE HEADERS ========== */
 .page-header {
-  background: linear-gradient(135deg, #4D96FF 0%, #3498db 50%, #5dade2 100%);
-  padding: var(--space-20) 0 var(--space-16);
+  background: var(--color-navy);
+  padding: clamp(var(--space-16), 10vw, 120px) 0 clamp(var(--space-12), 8vw, 80px);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -6748,14 +6748,7 @@ p {
 }
 
 .page-hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: linear-gradient(to top, var(--color-ivory), transparent);
-  pointer-events: none;
+  display: none;
 }
 
 .page-hero h1 {

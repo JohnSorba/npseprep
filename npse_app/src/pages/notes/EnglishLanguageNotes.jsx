@@ -5,7 +5,7 @@ const EnglishLanguageNotes = () => {
     return (
         <>
             {/* Page Header */}
-            <section className="page-header" style={{ '--paper-color': '#ec4899' }}>
+            <section className="page-hero">
                 <div className="container">
                     <div className="breadcrumbs" style={{ color: 'rgba(255,255,255,0.7)' }}>
                         <Link to="/" style={{ color: 'rgba(255,255,255,0.7)' }}>Home</Link>
@@ -14,11 +14,12 @@ const EnglishLanguageNotes = () => {
                         <span>›</span>
                         <span style={{ color: 'white' }}>English Language</span>
                     </div>
+                    <p className="platform-section__eyebrow" style={{ color: 'rgba(255,255,255,0.5)' }}>Study Notes</p>
                     <div style={{ fontSize: 'var(--text-5xl)', marginBottom: 'var(--space-4)' }}>
                         📝
                     </div>
                     <h1>English Language Notes</h1>
-                    <p>Comprehensive study materials covering Grammar, Vocabulary, Reading, Writing, Speaking, and Literature based on the MBSSE Prep 6 curriculum</p>
+                    <p className="page-hero__subtitle">Comprehensive study materials covering Grammar, Vocabulary, Reading, Writing, Speaking, and Literature based on the MBSSE Prep 6 curriculum</p>
                     <div className="subject-meta-badges">
                         <span className="badge badge-secondary">📁 10 Subject Areas</span>
                         <span className="badge badge-secondary">📄 Papers 1 & 2</span>

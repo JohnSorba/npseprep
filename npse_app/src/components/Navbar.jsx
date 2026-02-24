@@ -22,7 +22,6 @@ const NAV = [
             { label: 'Topic Quizzes', href: '/quiz' },
             { label: 'Games', href: '/games' },
             { label: 'Mock Exams', href: '/mock-exams' },
-            { label: 'Vocabulary Builder', href: '/vocabulary-builder' },
         ],
     },
     {
@@ -32,7 +31,7 @@ const NAV = [
             { label: 'Study Tips', href: '/study-tips' },
             { label: 'Curriculum', href: '/curriculum-resources' },
             { label: 'Blog', href: '/blog' },
-            { label: 'Store', href: '/store' },
+            // { label: 'Store', href: '/store' },
         ],
     },
     {

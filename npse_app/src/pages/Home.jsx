@@ -192,7 +192,7 @@ const Home = () => {
             <section className="platform-section platform-section--alt">
                 <div className="container">
                     <div className="platform-section__header">
-                        <p className="platform-section__eyebrow">Practise</p>
+                        <p className="platform-section__eyebrow">Practice</p>
                         <h2>Test your knowledge</h2>
                         <p className="platform-section__desc">
                             Interactive quizzes and educational games designed to reinforce learning and build exam confidence.
@@ -208,7 +208,8 @@ const Home = () => {
                             <ul className="practise-card__features">
                                 <li>5 NPSE subjects covered</li>
                                 <li>Instant answer feedback</li>
-                                <li>Score tracking</li>
+                                <li>Review answer immediately</li>
+                                {/* <li>Score tracking</li> */}
                             </ul>
                             <Link to="/quiz" className="access-card__cta access-card__cta--primary">Start a Quiz</Link>
                         </div>
@@ -280,7 +281,7 @@ const Home = () => {
             {/* ═══════════════════════════════════════════════════════════
                  4. PAST PAPERS
                 ═══════════════════════════════════════════════════════════ */}
-            <section className="platform-section platform-section--alt">
+            {/* <section className="platform-section platform-section--alt">
                 <div className="container">
                     <div className="platform-section__header">
                         <p className="platform-section__eyebrow">Past Papers</p>
@@ -311,7 +312,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* ═══════════════════════════════════════════════════════════
                  5. IMPACT + STATS (National Context)
@@ -370,7 +371,7 @@ const Home = () => {
             {/* ═══════════════════════════════════════════════════════════
                  7. RESOURCES
                 ═══════════════════════════════════════════════════════════ */}
-            <section className="platform-section platform-section--alt">
+            {/* <section className="platform-section platform-section--alt">
                 <div className="container">
                     <div className="platform-section__header">
                         <p className="platform-section__eyebrow">Resources</p>
@@ -398,7 +399,7 @@ const Home = () => {
                         </Link>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* ═══════════════════════════════════════════════════════════
                  8. FINAL CTA — Support & Get Started

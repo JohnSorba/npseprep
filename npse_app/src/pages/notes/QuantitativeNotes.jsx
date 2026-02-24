@@ -5,7 +5,7 @@ const QuantitativeNotes = () => {
     return (
         <>
             {/* Page Header */}
-            <section className="page-header" style={{ '--paper-color': '#06b6d4' }}>
+            <section className="page-hero">
                 <div className="container">
                     <div className="breadcrumbs" style={{ color: 'rgba(255,255,255,0.7)' }}>
                         <Link to="/" style={{ color: 'rgba(255,255,255,0.7)' }}>Home</Link>
@@ -14,11 +14,12 @@ const QuantitativeNotes = () => {
                         <span>›</span>
                         <span style={{ color: 'white' }}>Quantitative Aptitude</span>
                     </div>
+                    <p className="platform-section__eyebrow" style={{ color: 'rgba(255,255,255,0.5)' }}>Study Notes</p>
                     <div style={{ fontSize: 'var(--text-5xl)', marginBottom: 'var(--space-4)' }}>
                         🧮
                     </div>
                     <h1>Quantitative Aptitude Notes</h1>
-                    <p>Master patterns, codes, number series, and logical reasoning for the NPSE</p>
+                    <p className="page-hero__subtitle">Master patterns, codes, number series, and logical reasoning for the NPSE</p>
                     <div className="subject-meta-badges">
                         <span className="badge badge-secondary">📁 7 Subject Areas</span>
                         <span className="badge badge-secondary">📖 30 Units</span>

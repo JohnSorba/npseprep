@@ -4,7 +4,7 @@ import { verbalSubjects } from '../../data/verbalNotes';
 const VerbalNotes = () => {
     return (
         <>
-            <section className="page-header" style={{ '--paper-color': '#8b5cf6' }}>
+            <section className="page-hero">
                 <div className="container">
                     <div className="breadcrumbs" style={{ color: 'rgba(255,255,255,0.7)' }}>
                         <Link to="/" style={{ color: 'rgba(255,255,255,0.7)' }}>Home</Link>
@@ -13,9 +13,10 @@ const VerbalNotes = () => {
                         <span>›</span>
                         <span style={{ color: 'white' }}>Verbal Aptitude</span>
                     </div>
+                    <p className="platform-section__eyebrow" style={{ color: 'rgba(255,255,255,0.5)' }}>Study Notes</p>
                     <div style={{ fontSize: 'var(--text-5xl)', marginBottom: 'var(--space-4)' }}>💬</div>
                     <h1>Verbal Aptitude Notes</h1>
-                    <p>Master word relationships, vocabulary, and verbal reasoning skills for the NPSE</p>
+                    <p className="page-hero__subtitle">Master word relationships, vocabulary, and verbal reasoning skills for the NPSE</p>
                     <div className="subject-meta-badges">
                         <span className="badge badge-secondary">📁 8 Subject Areas</span>
                         <span className="badge badge-secondary">📖 30 Units</span>

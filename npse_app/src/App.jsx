@@ -17,7 +17,7 @@ import About from './pages/About';
 import CurriculumResources from './pages/CurriculumResources';
 import Blog from './pages/Blog';
 import Donate from './pages/Donate';
-import Store from './pages/Store';
+// import Store from './pages/Store';
 import PaymentStatus from './pages/PaymentStatus';
 import Dashboard from './pages/Dashboard';
 import AdminPanel from './pages/AdminPanel';
@@ -48,6 +48,8 @@ import MathUnitNotes from './pages/notes/MathUnitNotes';
 import Games from './pages/games/Games';
 import RapidRecall from './pages/games/RapidRecall';
 import TugOfWar from './pages/games/tugOfWar';
+import MatchAndLink from './pages/games/matchAndLink';
+import SpotTheMistake from './pages/games/spotTheMistake';
 import VocabularyBuilder from './pages/games/VocabularyBuilder';
 
 // Styles
@@ -85,11 +87,13 @@ function App() {
             <Route path="/games" element={<Games />} />
             <Route path="/games/rapid-recall" element={<RapidRecall />} />
             <Route path="/games/brain-tug" element={<TugOfWar />} />
+            <Route path="/games/match-link" element={<MatchAndLink />} />
+            <Route path="/games/spot-mistake" element={<SpotTheMistake />} />
             <Route path="/vocabulary-builder" element={<VocabularyBuilder />} />
 
             {/* Payment & Store Routes */}
             <Route path="/donate" element={<Donate />} />
-            <Route path="/store" element={<Store />} />
+            {/* <Route path="/store" element={<Store />} /> */}
             <Route path="/payment/success" element={<PaymentStatus />} />
             <Route path="/payment/pending" element={<PaymentStatus />} />
             <Route path="/payment/failed" element={<PaymentStatus />} />

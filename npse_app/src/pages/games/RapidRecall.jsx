@@ -1,6 +1,23 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { subjects } from '../../data/subjects';
+import mathQuizQuestions from '../../data/mathQuizQuestions';
+import verbalQuizQuestions from '../../data/verbalQuizQuestions';
+import quantitativeQuizQuestions from '../../data/quantitativeQuizQuestions';
+import englishLanguageQuizQuestions from '../../data/englishlanguageQuizQuestions';
+import generalPaperQuizQuestions from '../../data/generalPaperQuizQuestions';
+
+/* ================================================================
+   SUBJECT CONFIG — full question banks
+================================================================ */
+const SUBJECT_OPTIONS = [
+    { id: 'mathematics', name: 'Mathematics', icon: '📐', color: '#0c8ce9', questions: mathQuizQuestions },
+    { id: 'english', name: 'English Language', icon: '📝', color: '#e67e22', questions: englishLanguageQuizQuestions },
+    { id: 'verbal', name: 'Verbal Aptitude', icon: '🗣️', color: '#9b59b6', questions: verbalQuizQuestions },
+    { id: 'quantitative', name: 'Quantitative Aptitude', icon: '🔢', color: '#27ae60', questions: quantitativeQuizQuestions },
+    { id: 'general', name: 'General Paper', icon: '🌍', color: '#e74c3c', questions: generalPaperQuizQuestions },
+];
+
+const QUESTIONS_PER_GAME = 10;
 
 const RapidRecall = () => {
     const [gameState, setGameState] = useState('setup'); // setup, playing, results
@@ -11,21 +28,17 @@ const RapidRecall = () => {
     const [streak, setStreak] = useState(0);
     const [maxStreak, setMaxStreak] = useState(0);
     const [timeLeft, setTimeLeft] = useState(60);
-    const [difficulty, setDifficulty] = useState('standard');
     const [timerMode, setTimerMode] = useState(true);
-    const [feedback, setFeedback] = useState(null); // { correct: boolean, message: string }
+    const [feedback, setFeedback] = useState(null);
     const [answers, setAnswers] = useState([]);
     const [startTime, setStartTime] = useState(null);
-
-    // Filter subjects that have questions
-    const availableSubjects = subjects.filter(s => s.quizQuestions && s.quizQuestions.length > 0);
 
     const startGaming = () => {
         if (!selectedSubject) return;
 
-        // Shuffle and pick 10 questions
-        const shuffled = [...selectedSubject.quizQuestions].sort(() => 0.5 - Math.random());
-        const selected = shuffled.slice(0, 10);
+        // Shuffle and pick questions from the full question bank
+        const shuffled = [...selectedSubject.questions].sort(() => 0.5 - Math.random());
+        const selected = shuffled.slice(0, QUESTIONS_PER_GAME);
 
         setQuestions(selected);
         setCurrentQuestionIndex(0);
@@ -38,23 +51,25 @@ const RapidRecall = () => {
         setStartTime(Date.now());
     };
 
-    const handleAnswer = (optionIndex) => {
+    const handleAnswer = (optionLabel) => {
         if (feedback) return;
 
         const question = questions[currentQuestionIndex];
-        const isCorrect = optionIndex === question.correctAnswer;
+        const isCorrect = optionLabel === question.correctOption;
+        const correctOpt = question.options.find(o => o.label === question.correctOption);
 
         const newFeedback = {
             correct: isCorrect,
             message: isCorrect ? 'Great job!' : 'Not quite.',
-            correctOption: question.options[question.correctAnswer]
+            correctOption: correctOpt?.text || '',
+            userLabel: optionLabel,
         };
 
         setFeedback(newFeedback);
         setAnswers([...answers, {
             questionId: question.id,
             correct: isCorrect,
-            userAnswer: optionIndex,
+            userAnswer: optionLabel,
             time: Date.now()
         }]);
 
@@ -114,7 +129,7 @@ const RapidRecall = () => {
                         <div className="setting-group">
                             <label>1. Select Subject</label>
                             <div className="subject-pills">
-                                {availableSubjects.map(s => (
+                                {SUBJECT_OPTIONS.map(s => (
                                     <button
                                         key={s.id}
                                         className={`pill ${selectedSubject?.id === s.id ? 'active' : ''}`}
@@ -122,6 +137,7 @@ const RapidRecall = () => {
                                     >
                                         <span className="pill-icon">{s.icon}</span>
                                         {s.name}
+                                        <span className="pill-count">{s.questions.length}q</span>
                                     </button>
                                 ))}
                             </div>
@@ -195,23 +211,23 @@ const RapidRecall = () => {
                         <h2 className="game-question-text">{question.question}</h2>
 
                         <div className="options-grid">
-                            {question.options.map((option, idx) => {
+                            {question.options.map((option) => {
                                 let btnClass = "game-option-btn";
                                 if (feedback) {
-                                    if (idx === question.correctAnswer) btnClass += " correct";
-                                    else if (idx === answers[answers.length - 1]?.userAnswer && !answers[answers.length - 1]?.correct) btnClass += " incorrect";
+                                    if (option.label === question.correctOption) btnClass += " correct";
+                                    else if (option.label === feedback.userLabel && !feedback.correct) btnClass += " incorrect";
                                     else btnClass += " disabled";
                                 }
 
                                 return (
                                     <button
-                                        key={idx}
+                                        key={option.label}
                                         className={btnClass}
-                                        onClick={() => handleAnswer(idx)}
+                                        onClick={() => handleAnswer(option.label)}
                                         disabled={!!feedback}
                                     >
-                                        <span className="option-index">{String.fromCharCode(65 + idx)}</span>
-                                        {option}
+                                        <span className="option-index">{option.label}</span>
+                                        {option.text}
                                     </button>
                                 );
                             })}
@@ -279,10 +295,11 @@ const RapidRecall = () => {
                             {questions.map((q, idx) => {
                                 const ans = answers.find(a => a.questionId === q.id);
                                 if (ans && ans.correct) return null;
+                                const correctOpt = q.options.find(o => o.label === q.correctOption);
                                 return (
                                     <div key={idx} className="review-item">
                                         <p className="review-q"><strong>Q:</strong> {q.question}</p>
-                                        <p className="review-a"><strong>Correct Answer:</strong> {q.options[q.correctAnswer]}</p>
+                                        <p className="review-a"><strong>Correct Answer:</strong> {correctOpt?.text}</p>
                                         <p className="review-e">{q.explanation}</p>
                                     </div>
                                 );

@@ -22,7 +22,7 @@ const ELSubjectNotes = () => {
     return (
         <>
             {/* Page Header */}
-            <section className="page-header" style={{ '--subject-color': subject.color }}>
+            <section className="page-hero">
                 <div className="container">
                     <div className="breadcrumbs" style={{ color: 'rgba(255,255,255,0.7)' }}>
                         <Link to="/" style={{ color: 'rgba(255,255,255,0.7)' }}>Home</Link>
@@ -33,11 +33,12 @@ const ELSubjectNotes = () => {
                         <span>›</span>
                         <span style={{ color: 'white' }}>{subject.name}</span>
                     </div>
+                    <p className="platform-section__eyebrow" style={{ color: 'rgba(255,255,255,0.5)' }}>Study Notes</p>
                     <div style={{ fontSize: 'var(--text-5xl)', marginBottom: 'var(--space-4)' }}>
                         {subject.icon}
                     </div>
                     <h1>{subject.name}</h1>
-                    <p>{subject.description}</p>
+                    <p className="page-hero__subtitle">{subject.description}</p>
                     <div className="subject-meta-badges">
                         <span className="badge badge-secondary">📖 {subject.unitCount} Units</span>
                     </div>

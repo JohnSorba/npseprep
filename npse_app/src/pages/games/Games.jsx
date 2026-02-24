@@ -4,8 +4,9 @@ const Games = () => {
     const gameList = [
         { id: 'rapid-recall', name: 'Rapid Recall', description: 'Timed micro-drills to build fast retrieval and confidence.', icon: '⚡', color: '#F59E0B', path: '/games/rapid-recall', ready: true },
         { id: 'brain-tug', name: 'Brain Tug', description: 'Two-player tug-of-war! Answer questions faster to pull your opponent across the line.', icon: '🪢', color: '#E74C3C', path: '/games/brain-tug', ready: true },
-        { id: 'match-link', name: 'Match & Link', description: 'Improve understanding by matching definitions, examples, and processes.', icon: '🔗', color: '#3B82F6', path: '/games/match-link', ready: false },
-        { id: 'spot-mistake', name: 'Spot the Mistake', description: 'Train deeper understanding by identifying errors in worked solutions.', icon: '🔍', color: '#EF4444', path: '/games/spot-mistake', ready: false },
+        { id: 'match-link', name: 'Match & Link', description: 'Improve understanding by matching definitions, examples, and processes.', icon: '🔗', color: '#3B82F6', path: '/games/match-link', ready: true },
+        { id: 'spot-mistake', name: 'Spot the Mistake', description: 'Train deeper understanding by identifying errors in worked solutions.', icon: '🔍', color: '#EF4444', path: '/games/spot-mistake', ready: true },
+        { id: 'vocabulary-builder', name: 'Vocabulary Builder', description: 'Master 180 essential words from Schonell\'s Spelling List to boost your English scores.', icon: '📖', color: '#8B5CF6', path: '/vocabulary-builder', ready: true },
     ];
 
     return (
