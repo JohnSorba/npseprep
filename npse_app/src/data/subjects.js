@@ -8,12 +8,14 @@ export const subjects = [
         bgColor: '#e0efff',
         description: 'Master numbers, shapes, and problem-solving skills essential for NPSE success.',
         topics: [
-            'Number Operations',
-            'Fractions & Decimals',
-            'Geometry & Measurements',
-            'Word Problems',
-            'Data Handling',
-            'Ratio & Proportion'
+            'Numbers and Numeration',
+            'Fractions and Decimals',
+            'Basic Operations (BODMAS)',
+            'Percentages and Ratios',
+            'Geometry (Lines & Angles)',
+            'Area, Perimeter and Volume',
+            'Algebra Basics',
+            'Data Handling'
         ],
         sampleQuestions: [
             {
@@ -84,12 +86,14 @@ export const subjects = [
         bgColor: '#f3e8ff',
         description: 'Develop strong reading, writing, and grammar skills for clear communication.',
         topics: [
-            'Parts of Speech',
-            'Sentence Structure',
-            'Comprehension',
-            'Essay Writing',
-            'Vocabulary',
-            'Punctuation'
+            'Nouns and Pronouns',
+            'Verbs and Tenses',
+            'Adjectives and Adverbs',
+            'Direct and Indirect Speech',
+            'Composition Writing',
+            'Letter Writing (Formal/Informal)',
+            'Reading Comprehension',
+            'Vocabulary and Idioms'
         ],
         sampleQuestions: [
             {
@@ -165,12 +169,13 @@ export const subjects = [
         bgColor: '#fff7ed',
         description: 'Sharpen your numerical reasoning and mental math abilities.',
         topics: [
-            'Number Series',
-            'Mental Arithmetic',
-            'Tables & Graphs',
-            'Speed & Distance',
-            'Profit & Loss',
-            'Patterns'
+            'Code Representation',
+            'Sets and Venn Diagrams',
+            'Number Patterns',
+            'Mathematical Puzzles',
+            'Ages and Money Problems',
+            'Weight and Measurement',
+            'Roman Numerals'
         ],
         sampleQuestions: [
             {
@@ -241,12 +246,13 @@ export const subjects = [
         bgColor: '#ecfdf5',
         description: 'Enhance your vocabulary, word relationships, and verbal reasoning skills.',
         topics: [
-            'Synonyms & Antonyms',
             'Analogies',
-            'Word Meanings',
-            'Sentence Completion',
-            'Logical Reasoning',
-            'Idioms & Proverbs'
+            'Word Groups (Odd One Out)',
+            'Sentence Arrangement',
+            'Word Patterns',
+            'Synonyms & Antonyms',
+            'Proverbs and Idioms',
+            'Alphabetical Position'
         ],
         sampleQuestions: [
             {
@@ -317,12 +323,16 @@ export const subjects = [
         bgColor: '#fce7f3',
         description: 'Explore general knowledge about Sierra Leone, Africa, and the world.',
         topics: [
-            'Sierra Leone History',
-            'African Geography',
-            'World Cultures',
-            'Current Affairs',
-            'Science & Nature',
-            'Civic Education'
+            'Food and Nutrition',
+            'Family Life Education',
+            'Accidents and First Aid',
+            'The Human Body',
+            'Environmental Health',
+            'Soil Science and Crops',
+            'National Symbols',
+            'Citizenship and Ethics',
+            'Local Governance',
+            'Drug Abuse Awareness'
         ],
         sampleQuestions: [
             {

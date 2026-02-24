@@ -50,6 +50,15 @@ const SubjectDetail = () => {
                             </div>
                         ))}
                     </div>
+                    <div style={{ textAlign: 'center', marginTop: 'var(--space-8)' }}>
+                        <Link
+                            to={`/notes/${subject.id === 'general-paper' ? 'general-paper' : subject.id}`}
+                            className="btn btn-outline"
+                            style={{ borderColor: subject.color, color: subject.color }}
+                        >
+                            Browse Full {subject.name} Curriculum →
+                        </Link>
+                    </div>
                 </div>
             </section>
 

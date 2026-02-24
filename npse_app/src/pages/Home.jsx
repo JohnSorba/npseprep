@@ -101,7 +101,7 @@ const Home = () => {
                         <p className="platform-section__eyebrow">Learn</p>
                         <h2>Explore all NPSE Subjects</h2>
                         <p className="platform-section__desc">
-                            Click any subject to see its topics — or let us cycle through them for you.
+                            Click any subject to see its topics.
                         </p>
                     </div>
 
@@ -166,19 +166,19 @@ const Home = () => {
                             </div>
 
                             <div className="subject-explorer__panel-footer">
-                                <Link
+                                {/* <Link
                                     to={`/subjects/${current.id}`}
                                     className="access-card__cta access-card__cta--primary"
                                     style={{ background: current.color }}
                                 >
                                     Explore {current.name} →
-                                </Link>
+                                </Link> */}
                                 <Link
                                     to={NOTES_PATHS[current.id] || '/notes'}
                                     className="subject-explorer__notes-link"
                                     style={{ color: current.color }}
                                 >
-                                    Study Notes →
+                                    View Study Notes →
                                 </Link>
                             </div>
                         </div>
@@ -199,34 +199,38 @@ const Home = () => {
                         </p>
                     </div>
 
-                    <div className="practise-grid">
-                        {/* Quiz Card */}
-                        <div className="practise-card">
-                            <div className="practise-card__icon">🎯</div>
-                            <h3>Subject Quizzes</h3>
-                            <p>Choose any subject and test your understanding with instant feedback on every question.</p>
-                            <ul className="practise-card__features">
-                                <li>5 NPSE subjects covered</li>
-                                <li>Instant answer feedback</li>
-                                <li>Review answer immediately</li>
-                                {/* <li>Score tracking</li> */}
-                            </ul>
-                            <Link to="/quiz" className="access-card__cta access-card__cta--primary">Start a Quiz</Link>
-                        </div>
-
-                        {/* Games Cards */}
-                        {GAMES.map(game => (
-                            <div key={game.id} className="practise-card">
-                                <div className="practise-card__icon" style={{ color: game.color }}>{game.icon}</div>
-                                <h3>{game.name}</h3>
-                                <p>{game.desc}</p>
-                                {game.ready ? (
-                                    <Link to={game.path} className="access-card__cta access-card__cta--primary">Play Now</Link>
-                                ) : (
-                                    <span className="practise-card__soon">Coming Soon</span>
-                                )}
+                    <div className="practise-scroll-wrapper">
+                        <div className="practise-grid--simple">
+                            {/* Quiz Card */}
+                            <div className="practise-card practise-card--summary">
+                                <div className="practise-card__badge">Most Popular</div>
+                                <div className="practise-card__icon">🎯</div>
+                                <h3>Subject Quizzes</h3>
+                                <p>Choose any subject and test your understanding with instant feedback on every question.</p>
+                                <ul className="access-card__features">
+                                    <li>5 NPSE subjects covered</li>
+                                    <li>Instant answer feedback</li>
+                                    <li>Review answer immediately</li>
+                                    <li>Topic-specific drills</li>
+                                </ul>
+                                <Link to="/quiz" className="access-card__cta access-card__cta--primary">Start a Quiz</Link>
                             </div>
-                        ))}
+
+                            {/* Games Summary Card */}
+                            <div className="practise-card practise-card--summary">
+                                <div className="practise-card__badge" style={{ background: 'var(--color-sunny)', color: 'var(--color-ink)' }}>New Features</div>
+                                <div className="practise-card__icon" style={{ color: 'var(--color-peach)' }}>🎮</div>
+                                <h3>Interactive Games</h3>
+                                <p>Learn through play with themed micro-drills, pattern recognition, and rapid-recall challenges.</p>
+                                <ul className="access-card__features">
+                                    <li>Rapid Recall drills</li>
+                                    <li>Brain Tug of War</li>
+                                    <li>Vocabulary Builders</li>
+                                    <li>Fun & engaging format</li>
+                                </ul>
+                                <Link to="/games" className="access-card__cta access-card__cta--primary" style={{ background: 'var(--color-peach)' }}>Explore Games</Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
