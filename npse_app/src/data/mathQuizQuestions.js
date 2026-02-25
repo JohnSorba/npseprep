@@ -932,6 +932,7 @@ const mathQuizQuestions = [
     {
         id: 'math-q82', unit: 'math-unit-17', topic: 'Volume and Capacity', difficulty: 'medium',
         question: 'A cuboid is 8 cm × 5 cm × 4 cm. What is its volume?',
+        image: 'https://i.postimg.cc/vH77918K/image.png',
         options: [
             { label: 'A', text: '100 cm³' }, { label: 'B', text: '120 cm³' },
             { label: 'C', text: '140 cm³' }, { label: 'D', text: '160 cm³' },

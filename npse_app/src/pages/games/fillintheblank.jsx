@@ -108,7 +108,7 @@ const FillInTheBlank = () => {
     }, [activeLevelId]);
 
     /* ────────────────────────────────────────
-       START A LEVEL
+       START A LEVEL - GAMEPLAY
        ──────────────────────────────────────── */
     const startLevel = useCallback((levelId) => {
         let level = null;
