@@ -51,6 +51,8 @@ import TugOfWar from './pages/games/tugOfWar';
 import MatchAndLink from './pages/games/matchAndLink';
 import SpotTheMistake from './pages/games/spotTheMistake';
 import VocabularyBuilder from './pages/games/VocabularyBuilder';
+import WordScramble from './pages/games/WordScramble';
+import FillInTheBlank from './pages/games/FillInTheBlank';
 
 // Styles
 import './styles/index.css';
@@ -90,6 +92,8 @@ function App() {
             <Route path="/games/match-link" element={<MatchAndLink />} />
             <Route path="/games/spot-mistake" element={<SpotTheMistake />} />
             <Route path="/vocabulary-builder" element={<VocabularyBuilder />} />
+            <Route path="/word-scramble" element={<WordScramble />} />
+            <Route path="/fill-blank" element={<FillInTheBlank />} />
 
             {/* Payment & Store Routes */}
             <Route path="/donate" element={<Donate />} />

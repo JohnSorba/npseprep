@@ -12,6 +12,7 @@ import generalPaperQuizQuestions from '../../data/generalPaperQuizQuestions';
 const WIN_THRESHOLD = 50;
 const STEP_SIZE = 10;
 const GAME_TIME = 120; // seconds
+const IDLE_PAUSE_THRESHOLD = 10; // seconds
 
 /* ================================================================
    SUBJECT CONFIG
@@ -29,22 +30,8 @@ const SUBJECT_OPTIONS = [
 ================================================================ */
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-const pickQuestion = (pool) => {
-    if (!pool || pool.length === 0) return null;
-    const q = pool[Math.floor(Math.random() * pool.length)];
-    return {
-        id: q.id + '-' + Math.random(),
-        text: q.question,
-        options: q.options,
-        correctOption: q.correctOption,
-        explanation: q.explanation,
-    };
-};
-
 /* ================================================================
    SVG HUMAN SPRITE
-   - Static by default (no animation)
-   - Only animates briefly on correct/wrong answer via CSS class
 ================================================================ */
 const HumanSprite = ({ team, variant = 0, isWinner }) => {
     const isBlue = team === 'blue';
@@ -66,7 +53,6 @@ const HumanSprite = ({ team, variant = 0, isWinner }) => {
             className={`tow-sprite ${isWinner ? 'tow-winner' : ''}`}
             style={{ transform: `scaleX(${faceDir})` }}
         >
-            {/* Headband */}
             <ellipse cx="60" cy="24" rx="22" ry="10" fill={headband} />
             <rect x="38" y="18" width="44" height="8" fill={headband} rx="2" />
             {isBlue ? (
@@ -74,64 +60,35 @@ const HumanSprite = ({ team, variant = 0, isWinner }) => {
             ) : (
                 <path d="M38 22 Q30 18 25 25 Q32 28 38 22Z" fill={headband} opacity="0.8" />
             )}
-
-            {/* Hair */}
             <ellipse cx="60" cy="26" rx="20" ry="16" fill={hairColor} />
-
-            {/* Head */}
             <ellipse cx="60" cy="32" rx="16" ry="16" fill={skinColor} />
-
-            {/* Eyes */}
             <circle cx="53" cy="29" r="2.5" fill="#2C3E50" />
             <circle cx="67" cy="29" r="2.5" fill="#2C3E50" />
             <circle cx="53.8" cy="28.2" r="0.8" fill="white" />
             <circle cx="67.8" cy="28.2" r="0.8" fill="white" />
-
-            {/* Eyebrows */}
             <line x1="49" y1="24" x2="56" y2="25" stroke={hairColor} strokeWidth="1.5" strokeLinecap="round" />
             <line x1="64" y1="25" x2="71" y2="24" stroke={hairColor} strokeWidth="1.5" strokeLinecap="round" />
-
-            {/* Mouth */}
             {isWinner ? (
                 <path d="M53 38 Q60 46 67 38" fill="none" stroke="#E74C3C" strokeWidth="2" strokeLinecap="round" />
             ) : (
                 <path d="M55 38 Q60 40 65 38" fill="none" stroke="#C0392B" strokeWidth="1.5" strokeLinecap="round" />
             )}
-
-            {/* Neck */}
             <rect x="55" y="46" width="10" height="6" fill={skinColor} rx="3" />
-
-            {/* Torso */}
-            <path d="M38 55 Q38 52 48 50 L72 50 Q82 52 82 55 L84 100 Q84 104 60 106 Q36 104 36 100 Z"
-                fill={shirtColor} />
+            <path d="M38 55 Q38 52 48 50 L72 50 Q82 52 82 55 L84 100 Q84 104 60 106 Q36 104 36 100 Z" fill={shirtColor} />
             <line x1="45" y1="55" x2="55" y2="95" stroke={shirtPattern} strokeWidth="3" opacity="0.3" />
             <line x1="55" y1="55" x2="65" y2="95" stroke={shirtPattern} strokeWidth="3" opacity="0.3" />
             <line x1="65" y1="55" x2="75" y2="95" stroke={shirtPattern} strokeWidth="3" opacity="0.3" />
             <path d="M52 50 L60 58 L68 50" fill="none" stroke={shirtPattern} strokeWidth="2" />
-
-            {/* Back arm pulling */}
-            <path d={`M${isBlue ? 38 : 82} 62 Q${isBlue ? 14 : 106} 66 ${isBlue ? -5 : 125} 72`}
-                fill="none" stroke={skinColor} strokeWidth="9" strokeLinecap="round" />
+            <path d={`M${isBlue ? 38 : 82} 62 Q${isBlue ? 14 : 106} 66 ${isBlue ? -5 : 125} 72`} fill="none" stroke={skinColor} strokeWidth="9" strokeLinecap="round" />
             <circle cx={isBlue ? -5 : 125} cy="72" r="6" fill={skinColor} />
             <circle cx={isBlue ? -3 : 123} cy="69" r="2.5" fill={skinColor} />
             <circle cx={isBlue ? 0 : 120} cy="71" r="2.5" fill={skinColor} />
-
-            {/* Front arm bracing */}
-            <path d={`M${isBlue ? 82 : 38} 62 Q${isBlue ? 94 : 26} 80 ${isBlue ? 88 : 32} 95`}
-                fill="none" stroke={skinColor} strokeWidth="8" strokeLinecap="round" />
+            <path d={`M${isBlue ? 82 : 38} 62 Q${isBlue ? 94 : 26} 80 ${isBlue ? 88 : 32} 95`} fill="none" stroke={skinColor} strokeWidth="8" strokeLinecap="round" />
             <circle cx={isBlue ? 88 : 32} cy="95" r="5" fill={skinColor} />
-
-            {/* Belt */}
             <rect x="36" y="98" width="48" height="6" rx="3" fill="#5D4037" />
             <rect x="56" y="97" width="8" height="8" rx="2" fill="#8D6E63" />
-
-            {/* Legs */}
-            <path d="M46 104 L30 145 L24 165"
-                fill="none" stroke={pantsColor} strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M74 104 L85 145 L90 165"
-                fill="none" stroke={pantsColor} strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
-
-            {/* Shoes */}
+            <path d="M46 104 L30 145 L24 165" fill="none" stroke={pantsColor} strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M74 104 L85 145 L90 165" fill="none" stroke={pantsColor} strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
             <ellipse cx="20" cy="170" rx="12" ry="6" fill={shoeColor} />
             <ellipse cx="94" cy="170" rx="12" ry="6" fill={shoeColor} />
             <ellipse cx="16" cy="168" rx="4" ry="3" fill="white" opacity="0.3" />
@@ -141,10 +98,9 @@ const HumanSprite = ({ team, variant = 0, isWinner }) => {
 };
 
 /* ================================================================
-   ARENA — central tug scene with scoreboard
-   Sprites are always centered vertically, never stretched
+   ARENA
 ================================================================ */
-const Arena = ({ position, winner, p1Score, p2Score, timer }) => {
+const Arena = ({ position, winner, p1Score, p2Score, timer, onResume, isPaused }) => {
     const clamped = Math.max(-50, Math.min(50, position));
     const pct = 50 + clamped;
 
@@ -156,7 +112,6 @@ const Arena = ({ position, winner, p1Score, p2Score, timer }) => {
 
     return (
         <div className="tow-arena-wrap">
-            {/* Scoreboard */}
             <div className="tow-scoreboard">
                 <div className="tow-sb-team tow-sb-blue">
                     <span className="tow-sb-label">Team 1</span>
@@ -172,35 +127,40 @@ const Arena = ({ position, winner, p1Score, p2Score, timer }) => {
                 </div>
             </div>
 
-            {/* Arena field — fixed height, sprites centered */}
             <div className="tow-arena">
                 <div className="tow-center-line" />
-
                 <div className="tow-rope-group" style={{ left: `${pct}%` }}>
-                    {/* Team 1 — 2 humans */}
                     <div className="tow-team-sprites tow-team-left">
                         <HumanSprite team="blue" variant={0} isWinner={winner === 1} />
                         <HumanSprite team="blue" variant={1} isWinner={winner === 1} />
                     </div>
-
-                    {/* Rope */}
                     <div className="tow-rope">
                         <div className="tow-knot" />
                     </div>
-
-                    {/* Team 2 — 2 humans */}
                     <div className="tow-team-sprites tow-team-right">
                         <HumanSprite team="red" variant={0} isWinner={winner === 2} />
                         <HumanSprite team="red" variant={1} isWinner={winner === 2} />
                     </div>
                 </div>
 
-                {/* Winner overlay */}
                 {winner && (
                     <div className="tow-winner-overlay">
                         <div className="tow-winner-card">
                             <span className="tow-trophy">🏆</span>
                             <h2>Team {winner} Wins!</h2>
+                        </div>
+                    </div>
+                )}
+
+                {isPaused && !winner && (
+                    <div className="tow-winner-overlay">
+                        <div className="tow-winner-card tow-pause-card">
+                            <span className="tow-trophy">💤</span>
+                            <h2>Napping?</h2>
+                            <p>No activity detected. Tap continue to resume.</p>
+                            <button className="tow-btn-play-again" onClick={onResume} style={{ marginTop: '20px' }}>
+                                ▶️ Continue
+                            </button>
                         </div>
                     </div>
                 )}
@@ -210,7 +170,7 @@ const Arena = ({ position, winner, p1Score, p2Score, timer }) => {
 };
 
 /* ================================================================
-   TEAM PANEL — question + options for one team
+   TEAM PANEL
 ================================================================ */
 const TeamPanel = ({ team, score, question, onAnswer, disabled, feedback }) => {
     if (!question) return <div className={`tow-team-panel tow-tp-${team}`} />;
@@ -232,7 +192,7 @@ const TeamPanel = ({ team, score, question, onAnswer, disabled, feedback }) => {
                         <button
                             key={opt.label}
                             onClick={() => onAnswer(opt.label)}
-                            disabled={disabled}
+                            disabled={disabled || feedback}
                             className={`tow-tp-opt tow-tp-opt-${team}`}
                         >
                             <span className={`tow-tp-opt-letter tow-tp-letter-${team}`}>{opt.label}</span>
@@ -251,10 +211,13 @@ const TeamPanel = ({ team, score, question, onAnswer, disabled, feedback }) => {
 export default function TugOfWar() {
     const [phase, setPhase] = useState('select');
     const [selectedSubject, setSelectedSubject] = useState(null);
+    const [questionMode, setQuestionMode] = useState('random'); // random | same
     const [questionPool, setQuestionPool] = useState([]);
     const [ropePosition, setRopePosition] = useState(0);
     const [p1Question, setP1Question] = useState(null);
     const [p2Question, setP2Question] = useState(null);
+    const [p1Index, setP1Index] = useState(0);
+    const [p2Index, setP2Index] = useState(0);
     const [p1Score, setP1Score] = useState(0);
     const [p2Score, setP2Score] = useState(0);
     const [p1Feedback, setP1Feedback] = useState(null);
@@ -262,6 +225,10 @@ export default function TugOfWar() {
     const [winner, setWinner] = useState(null);
     const [timer, setTimer] = useState(GAME_TIME);
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [isPaused, setIsPaused] = useState(false);
+    const [hasInitialActivity, setHasInitialActivity] = useState(false);
+    const [idleCounter, setIdleCounter] = useState(0);
+
     const timerRef = useRef(null);
     const gameRef = useRef(null);
 
@@ -275,48 +242,91 @@ export default function TugOfWar() {
         }
     }, []);
 
-    /* Listen for fullscreen changes (e.g. user presses Escape) */
     useEffect(() => {
         const handler = () => setIsFullscreen(!!document.fullscreenElement);
         document.addEventListener('fullscreenchange', handler);
         return () => document.removeEventListener('fullscreenchange', handler);
     }, []);
 
+    // Format a question from the data pool
+    const formatQuestionObj = (q) => {
+        if (!q) return null;
+        return {
+            id: q.id + '-' + Math.random(),
+            text: q.question,
+            options: q.options,
+            correctOption: q.correctOption,
+            explanation: q.explanation,
+        };
+    };
+
     /* Start game */
-    const startGame = useCallback((subject) => {
+    const startGame = useCallback((subject, mode = 'random') => {
         const pool = shuffle(subject.questions);
         setSelectedSubject(subject);
         setQuestionPool(pool);
+        setQuestionMode(mode);
         setRopePosition(0);
         setP1Score(0);
         setP2Score(0);
+        setP1Index(0);
+        setP2Index(mode === 'same' ? 0 : 1); // Start different for random
         setWinner(null);
         setP1Feedback(null);
         setP2Feedback(null);
         setTimer(GAME_TIME);
-        setP1Question(pickQuestion(pool));
-        setP2Question(pickQuestion(pool));
+        setIsPaused(false);
+        setHasInitialActivity(false);
+        setIdleCounter(0);
+
+        if (mode === 'same') {
+            const q = formatQuestionObj(pool[0]);
+            setP1Question(q);
+            setP2Question(q);
+        } else {
+            setP1Question(formatQuestionObj(pool[0]));
+            setP2Question(formatQuestionObj(pool[1 % pool.length]));
+        }
         setPhase('playing');
     }, []);
 
-    /* Timer */
+    /* Timer & Idle check */
     useEffect(() => {
-        if (phase !== 'playing') return;
+        if (phase !== 'playing' || isPaused) return;
+
         timerRef.current = setInterval(() => {
+            // Idle check at the start
+            if (!hasInitialActivity) {
+                setIdleCounter((prev) => {
+                    if (prev + 1 >= IDLE_PAUSE_THRESHOLD) {
+                        setIsPaused(true);
+                        return 0;
+                    }
+                    return prev + 1;
+                });
+            }
+
             setTimer((t) => {
                 if (t <= 1) {
                     clearInterval(timerRef.current);
-                    if (ropePosition < 0) setWinner(1);
-                    else if (ropePosition > 0) setWinner(2);
-                    else setWinner(p1Score >= p2Score ? 1 : 2);
+                    // Determine winner based primarily on points if timer runs out
+                    if (p1Score > p2Score) setWinner(1);
+                    else if (p2Score > p1Score) setWinner(2);
+                    else {
+                        // Tie-break with rope position
+                        if (ropePosition < 0) setWinner(1);
+                        else if (ropePosition > 0) setWinner(2);
+                        else setWinner(1); // Final fallback
+                    }
                     setPhase('finished');
                     return 0;
                 }
                 return t - 1;
             });
         }, 1000);
+
         return () => clearInterval(timerRef.current);
-    }, [phase]);
+    }, [phase, isPaused, hasInitialActivity, ropePosition, p1Score, p2Score]);
 
     /* Check win by threshold */
     useEffect(() => {
@@ -333,27 +343,47 @@ export default function TugOfWar() {
 
     /* Handle answer */
     const handleAnswer = (player, selectedLabel) => {
-        if (phase !== 'playing') return;
+        if (phase !== 'playing' || isPaused) return;
+        setHasInitialActivity(true);
 
         const isP1 = player === 1;
         const currentQ = isP1 ? p1Question : p2Question;
-        const setFb = isP1 ? setP1Feedback : setP2Feedback;
-        const setQ = isP1 ? setP1Question : setP2Question;
-        const setScr = isP1 ? setP1Score : setP2Score;
+        const isCorrect = selectedLabel === currentQ.correctOption;
 
-        if (selectedLabel === currentQ.correctOption) {
-            setFb('success');
-            setScr((s) => s + 1);
-            setRopePosition((prev) => (isP1 ? prev - STEP_SIZE : prev + STEP_SIZE));
-            setTimeout(() => {
-                setFb(null);
-                setQ(pickQuestion(questionPool));
-            }, 300);
+        if (isP1) setP1Feedback(isCorrect ? 'success' : 'error');
+        else setP2Feedback(isCorrect ? 'success' : 'error');
+
+        // Update score and rope
+        if (isCorrect) {
+            if (isP1) setP1Score(s => s + 1);
+            else setP2Score(s => s + 1);
+            setRopePosition((prev) => isP1 ? prev - STEP_SIZE : prev + STEP_SIZE);
         } else {
-            setFb('error');
-            setRopePosition((prev) => (isP1 ? prev + STEP_SIZE : prev - STEP_SIZE));
-            setTimeout(() => setFb(null), 500);
+            // Wrong answer pulls toward opponent
+            setRopePosition((prev) => isP1 ? prev + STEP_SIZE : prev - STEP_SIZE);
         }
+
+        // Delay to show feedback before moving to next question
+        setTimeout(() => {
+            setP1Feedback(null);
+            setP2Feedback(null);
+
+            // Increment index and pick next question ONLY for the responding player
+            if (isP1) {
+                const nextIdx = (p1Index + 1) % questionPool.length;
+                setP1Index(nextIdx);
+                setP1Question(formatQuestionObj(questionPool[nextIdx]));
+            } else {
+                const nextIdx = (p2Index + 1) % questionPool.length;
+                setP2Index(nextIdx);
+                setP2Question(formatQuestionObj(questionPool[nextIdx]));
+            }
+        }, 400);
+    };
+
+    const resumeGame = () => {
+        setIsPaused(false);
+        setHasInitialActivity(true);
     };
 
     /* ================================
@@ -367,7 +397,27 @@ export default function TugOfWar() {
                     <div className="tow-select-header">
                         <span className="tow-select-icon">🪢</span>
                         <h1>Brain Tug</h1>
-                        <p>Answer questions faster than your opponent to pull them across the line! Choose a subject to begin.</p>
+                        <p>Answer questions faster than your opponent to pull them across the line! Choose your settings.</p>
+                    </div>
+
+                    <div className="tow-setup-options">
+                        <div className="tow-mode-toggle">
+                            <label>Question Type:</label>
+                            <div className="tow-toggle-btns">
+                                <button
+                                    className={`tow-toggle-btn ${questionMode === 'random' ? 'active' : ''}`}
+                                    onClick={() => setQuestionMode('random')}
+                                >
+                                    🎲 Random (Individual)
+                                </button>
+                                <button
+                                    className={`tow-toggle-btn ${questionMode === 'same' ? 'active' : ''}`}
+                                    onClick={() => setQuestionMode('same')}
+                                >
+                                    ⚔️ Same (Symmetric)
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="tow-subject-grid">
@@ -376,7 +426,7 @@ export default function TugOfWar() {
                                 key={subj.id}
                                 className="tow-subject-card"
                                 style={{ '--accent': subj.color }}
-                                onClick={() => startGame(subj)}
+                                onClick={() => startGame(subj, questionMode)}
                             >
                                 <span className="tow-subj-icon">{subj.icon}</span>
                                 <span className="tow-subj-name">{subj.name}</span>
@@ -389,9 +439,10 @@ export default function TugOfWar() {
                         <h3>How to Play</h3>
                         <ul>
                             <li>🎮 Two players share one screen — <strong>Team 1</strong> (Blue) vs <strong>Team 2</strong> (Red).</li>
-                            <li>✅ A correct answer pulls the rope toward your team.</li>
-                            <li>❌ A wrong answer pulls it toward the opponent and a new question appears immediately.</li>
-                            <li>🏆 First to pull the opponent past the line wins!</li>
+                            <li>✅ Correct pulls toward you. ❌ Wrong pulls toward opponent.</li>
+                            <li>🔄 New question appears immediately after any answer.</li>
+                            <li>💡 <strong>Symmetric Mode</strong>: Both teams get the same question. First to answer wins the pull!</li>
+                            <li>🏆 Winner is decided by rope position OR points if time runs out.</li>
                         </ul>
                     </div>
                 </div>
@@ -404,14 +455,12 @@ export default function TugOfWar() {
     ================================ */
     return (
         <div className="tow-page tow-page-light" ref={gameRef}>
-            {/* Title bar */}
             <div className="tow-title-bar">
                 <Link to="/games" className="tow-home-btn">🏠 HOME</Link>
                 <div className="tow-title-center">
                     <h1 className="tow-game-title">TUG OF WAR: {selectedSubject?.name.toUpperCase()}</h1>
                     <p className="tow-title-sub">
-                        Correct answer pulls the rope toward your team.
-                        Wrong answer pulls it toward the opponent.
+                        {questionMode === 'same' ? 'Both teams get the same question. Race to answer!' : 'Each team gets their own questions.'}
                     </p>
                 </div>
                 <div className="tow-title-actions">
@@ -424,14 +473,13 @@ export default function TugOfWar() {
                 </div>
             </div>
 
-            {/* Game layout — all 3 children are direct grid items for CSS reordering */}
             <div className="tow-game-layout">
                 <TeamPanel
                     team="blue"
                     score={p1Score}
                     question={p1Question}
                     onAnswer={(label) => handleAnswer(1, label)}
-                    disabled={phase === 'finished'}
+                    disabled={phase === 'finished' || isPaused}
                     feedback={p1Feedback}
                 />
 
@@ -441,6 +489,8 @@ export default function TugOfWar() {
                     p1Score={p1Score}
                     p2Score={p2Score}
                     timer={timer}
+                    isPaused={isPaused}
+                    onResume={resumeGame}
                 />
 
                 <TeamPanel
@@ -448,20 +498,20 @@ export default function TugOfWar() {
                     score={p2Score}
                     question={p2Question}
                     onAnswer={(label) => handleAnswer(2, label)}
-                    disabled={phase === 'finished'}
+                    disabled={phase === 'finished' || isPaused}
                     feedback={p2Feedback}
                 />
             </div>
 
-            {/* End-game buttons */}
             {phase === 'finished' && (
                 <div className="tow-endgame-cta">
-                    <button className="tow-btn-play-again" onClick={() => startGame(selectedSubject)}>
+                    <button className="tow-btn-play-again" onClick={() => startGame(selectedSubject, questionMode)}>
                         🔄 Rematch
                     </button>
                     <button className="tow-btn-change" onClick={() => setPhase('select')}>
                         📚 Change Subject
                     </button>
+                    <Link to="/games" className="tow-btn-secondary">← All Games</Link>
                 </div>
             )}
         </div>

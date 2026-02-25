@@ -1,0 +1,438 @@
+/* ══════════════════════════════════════════════════════════════
+   WORD SCRAMBLE — Premium Game Styles
+   ══════════════════════════════════════════════════════════════ */
+
+.ws-page {
+    min-height: calc(100vh - 72px);
+    background: var(--color-bg);
+    padding-bottom: var(--space-16);
+}
+
+.ws-page.ws-game-active {
+    background: #f8fafc;
+    padding-bottom: 0;
+}
+
+/* ── Back link ── */
+.ws-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-6);
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.ws-back-link:hover {
+    color: var(--color-ink);
+}
+
+/* ── Hero ── */
+.ws-hero {
+    text-align: center;
+    margin-bottom: var(--space-12);
+}
+
+.ws-hero-icon {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: var(--space-3);
+    animation: ws-float 3s ease-in-out infinite;
+}
+
+@keyframes ws-float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.ws-hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(var(--text-4xl), 5vw, var(--text-6xl));
+    font-weight: 800;
+    color: var(--color-ink);
+}
+
+.ws-hero p {
+    max-width: 500px;
+    margin: var(--space-3) auto 0;
+    color: var(--color-muted);
+    font-size: var(--text-lg);
+    line-height: 1.6;
+}
+
+/* ── Map / Section Cards ── */
+.ws-sections {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.ws-section-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-sm);
+}
+
+.ws-section-header {
+    display: flex;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.ws-section-icon {
+    font-size: 2.5rem;
+    background: rgba(var(--section-color-rgb, 139, 92, 246), 0.1);
+    color: var(--section-color);
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-xl);
+}
+
+.ws-section-header h2 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-1);
+}
+
+.ws-section-header p {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+}
+
+.ws-progress-track {
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    margin-bottom: var(--space-6);
+    overflow: hidden;
+}
+
+.ws-progress-fill {
+    height: 100%;
+    background: var(--section-color);
+    transition: width 0.5s ease;
+}
+
+/* ── Level Grid ── */
+.ws-level-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: var(--space-4);
+}
+
+.ws-level-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4) var(--space-2);
+    border: 1px solid var(--color-border);
+    background: white;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.ws-level-btn.locked {
+    opacity: 0.5;
+    background: #f1f5f9;
+    cursor: not-allowed;
+}
+
+.ws-level-btn.unlocked {
+    border-color: var(--section-color);
+    background: rgba(var(--section-color-rgb), 0.05);
+}
+
+.ws-level-btn.complete {
+    background: #f0fdf4;
+    border-color: #22c55e;
+}
+
+.ws-lvl-num {
+    font-weight: 700;
+    font-size: var(--text-lg);
+}
+
+.ws-level-btn small {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+/* ── Game Bar ── */
+.ws-top-bar {
+    height: 72px;
+    background: white;
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.ws-bar-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+}
+
+.ws-quit {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-muted);
+    cursor: pointer;
+    padding: var(--space-2);
+}
+
+.ws-bar-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.ws-category {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.ws-level {
+    font-weight: 600;
+}
+
+.ws-bar-progress {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.ws-bar-track {
+    flex: 1;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.ws-bar-fill {
+    height: 100%;
+    transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ── Game Content ── */
+.ws-game-content {
+    padding-top: var(--space-12);
+    display: flex;
+    justify-content: center;
+}
+
+.ws-word-card {
+    background: white;
+    width: 100%;
+    max-width: 560px;
+    border-radius: var(--radius-3xl);
+    padding: var(--space-12);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    text-align: center;
+}
+
+.ws-scrambled-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-12);
+}
+
+.ws-char-tile {
+    width: clamp(48px, 10vw, 64px);
+    height: clamp(48px, 10vw, 64px);
+    background: #1e293b;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    animation: ws-tile-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+}
+
+@keyframes ws-tile-in {
+    from {
+        transform: scale(0.5) translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.ws-input {
+    width: 100%;
+    padding: var(--space-6);
+    font-size: var(--text-2xl);
+    font-family: var(--font-heading);
+    text-align: center;
+    border: 3px solid #e2e8f0;
+    border-radius: var(--radius-2xl);
+    margin-bottom: var(--space-6);
+    transition: all 0.2s;
+    outline: none;
+    letter-spacing: 0.1em;
+}
+
+.ws-input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.ws-input.error {
+    border-color: #ef4444;
+    color: #ef4444;
+    background: #fef2f2;
+}
+
+.ws-actions {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-3);
+}
+
+.ws-btn {
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.ws-btn-primary {
+    background: #6366f1;
+    color: white;
+}
+
+.ws-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
+}
+
+.ws-btn-secondary {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.ws-submit-btn {
+    background: #1e293b;
+    color: white;
+    padding: var(--space-4);
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    border: none;
+    cursor: pointer;
+}
+
+.ws-reshuffle-btn {
+    background: #f1f5f9;
+    color: #475569;
+    border: none;
+    padding: var(--space-4);
+    border-radius: var(--radius-xl);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ws-reshuffle-btn:hover {
+    background: #e2e8f0;
+}
+
+.ws-word-card.shake {
+    animation: ws-shake 0.4s ease-in-out;
+}
+
+@keyframes ws-shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    75% {
+        transform: translateX(8px);
+    }
+}
+
+.ws-word-card.correct {
+    border: 2px solid #22c55e;
+    background: #f0fdf4;
+}
+
+.ws-hint-toggle {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: var(--space-6);
+    text-decoration: underline;
+}
+
+.ws-hint-text {
+    margin-top: var(--space-2);
+    color: #64748b;
+    font-size: var(--text-sm);
+}
+
+/* ── Completion ── */
+.ws-complete-card {
+    background: white;
+    max-width: 500px;
+    margin: var(--space-12) auto;
+    padding: var(--space-12);
+    border-radius: var(--radius-3xl);
+    text-align: center;
+    box-shadow: var(--shadow-xl);
+}
+
+.ws-complete-emoji {
+    font-size: 5rem;
+    margin-bottom: var(--space-6);
+}
+
+.ws-complete-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: center;
+    margin-top: var(--space-8);
+}

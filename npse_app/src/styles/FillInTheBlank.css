@@ -1,0 +1,489 @@
+/* ══════════════════════════════════════════════════════════════
+   FILL IN THE BLANK — Cinematic Game Styles
+   ══════════════════════════════════════════════════════════════ */
+
+.fb-page {
+    min-height: calc(100vh - 72px);
+    background: var(--color-bg);
+    padding-bottom: var(--space-20);
+}
+
+.fb-page.fb-game-active {
+    background: #f8fafc;
+    padding-bottom: 0;
+}
+
+/* ── Back Link ── */
+.fb-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-10);
+    margin-bottom: var(--space-6);
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.fb-back-link:hover {
+    color: var(--color-ink);
+}
+
+/* ── Hero ── */
+.fb-hero {
+    text-align: center;
+    margin-bottom: var(--space-16);
+}
+
+.fb-hero-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: var(--space-4);
+    animation: fb-float 3s ease-in-out infinite;
+}
+
+@keyframes fb-float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+.fb-hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(var(--text-4xl), 6vw, var(--text-6xl));
+    font-weight: 800;
+    color: var(--color-ink);
+    margin-bottom: var(--space-4);
+}
+
+.fb-hero p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--color-muted);
+    font-size: var(--text-lg);
+}
+
+/* ── Section Cards ── */
+.fb-sections {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.fb-section-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease;
+}
+
+.fb-section-header {
+    display: flex;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.fb-section-icon {
+    font-size: 2.5rem;
+    background: rgba(var(--section-color-rgb, 99, 102, 241), 0.1);
+    color: var(--section-color);
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-xl);
+}
+
+.fb-section-header h2 {
+    font-size: var(--text-xl);
+}
+
+.fb-section-header p {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+}
+
+.fb-section-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.fb-progress-bar {
+    flex: 1;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.fb-progress-bar .fb-progress-fill {
+    height: 100%;
+    background: var(--section-color);
+}
+
+.fb-section-progress span {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-muted);
+}
+
+/* ── Level Grid inside Sections ── */
+.fb-levels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--space-4);
+}
+
+.fb-level-btn {
+    padding: var(--space-4) var(--space-2);
+    border: 1px solid var(--color-border);
+    background: white;
+    border-radius: var(--radius-lg);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.fb-level-btn.unlocked {
+    border-color: var(--section-color);
+    color: var(--section-color);
+    background: rgba(var(--section-color-rgb), 0.05);
+}
+
+.fb-level-btn.unlocked:hover {
+    transform: translateY(-2px);
+    background: var(--section-color);
+    color: white;
+}
+
+.fb-level-btn.complete {
+    background: #f0fdf4;
+    border-color: #22c55e;
+    color: #166534;
+}
+
+.fb-level-btn.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #f1f5f9;
+}
+
+/* ── Game Bar ── */
+.fb-top-bar {
+    height: 80px;
+    background: white;
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.fb-bar-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+}
+
+.fb-quit {
+    background: #f1f5f9;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    color: var(--color-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.fb-quit:hover {
+    background: #fee2e2;
+    color: #ef4444;
+}
+
+.fb-game-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.fb-game-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #6366f1;
+}
+
+.fb-game-level {
+    font-weight: 600;
+}
+
+.fb-progress {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.fb-progress-track {
+    flex: 1;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.fb-progress-fill {
+    height: 100%;
+    background: #6366f1;
+    transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.fb-progress-text {
+    font-weight: 700;
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+}
+
+/* ── Game Container ── */
+.fb-game-container {
+    padding-top: var(--space-16);
+    display: flex;
+    justify-content: center;
+}
+
+.fb-word-box {
+    background: white;
+    width: 100%;
+    max-width: 700px;
+    padding: var(--space-12);
+    border-radius: var(--radius-3xl);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.fb-word-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-12);
+}
+
+.fb-char-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fb-static-char {
+    width: clamp(40px, 8vw, 56px);
+    height: clamp(40px, 8vw, 56px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1e293b;
+    border-bottom: 3px solid #cbd5e1;
+}
+
+.fb-blank-input {
+    width: clamp(40px, 8vw, 56px);
+    height: clamp(40px, 8vw, 56px);
+    background: #f1f5f9;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #6366f1;
+    outline: none;
+    transition: all 0.2s;
+    text-transform: uppercase;
+}
+
+.fb-blank-input:focus {
+    border-color: #6366f1;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.fb-blank-input.active {
+    border-color: #6366f1;
+    background: #f5f3ff;
+}
+
+.fb-game-msg {
+    font-weight: 700;
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-4);
+    animation: fb-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes fb-pop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.fb-game-msg.success {
+    color: #22c55e;
+}
+
+.fb-game-msg.error {
+    color: #ef4444;
+}
+
+.fb-success {
+    border-color: #22c55e;
+    background: #f0fdf4;
+}
+
+.fb-error {
+    animation: fb-shake 0.4s ease-in-out;
+}
+
+@keyframes fb-shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    75% {
+        transform: translateX(8px);
+    }
+}
+
+.fb-game-instructions {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+}
+
+/* ── Hint Box ── */
+.fb-hint-box {
+    margin-bottom: var(--space-8);
+    padding: var(--space-4);
+    background: #f8fafc;
+    border-left: 4px solid #6366f1;
+    border-radius: var(--radius-lg);
+    text-align: left;
+}
+
+.fb-hint-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #6366f1;
+    margin-bottom: var(--space-1);
+}
+
+.fb-hint-text {
+    font-size: var(--text-sm);
+    color: #475569;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+/* ── Complete Card ── */
+.fb-complete-card {
+    background: white;
+    max-width: 500px;
+    margin: var(--space-20) auto;
+    padding: var(--space-12);
+    border-radius: var(--radius-3xl);
+    text-align: center;
+    box-shadow: var(--shadow-2xl);
+}
+
+.fb-confetti {
+    font-size: 5rem;
+    margin-bottom: var(--space-6);
+    animation: fb-bounce 2s infinite;
+}
+
+@keyframes fb-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.fb-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: center;
+    margin-top: var(--space-10);
+}
+
+.fb-btn-primary {
+    background: #6366f1;
+    color: white;
+    border: none;
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.fb-btn-primary:hover {
+    background: #4f46e5;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+}
+
+.fb-btn-secondary {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.fb-btn-secondary:hover {
+    background: #e2e8f0;
+}
