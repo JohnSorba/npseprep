@@ -47,9 +47,9 @@ import MathUnitNotes from './pages/notes/MathUnitNotes';
 // Game pages
 import Games from './pages/games/Games';
 import RapidRecall from './pages/games/RapidRecall';
-import TugOfWar from './pages/games/tugOfWar';
-import MatchAndLink from './pages/games/matchAndLink';
-import SpotTheMistake from './pages/games/spotTheMistake';
+import TugOfWar from './pages/games/TugOfWar';
+import MatchAndLink from './pages/games/MatchAndLink';
+import SpotTheMistake from './pages/games/SpotTheMistake';
 import VocabularyBuilder from './pages/games/VocabularyBuilder';
 import WordScramble from './pages/games/WordScramble';
 import FillInTheBlank from './pages/games/FillInTheBlank';
@@ -91,9 +91,9 @@ function App() {
             <Route path="/games/brain-tug" element={<TugOfWar />} />
             <Route path="/games/match-link" element={<MatchAndLink />} />
             <Route path="/games/spot-mistake" element={<SpotTheMistake />} />
-            <Route path="/vocabulary-builder" element={<VocabularyBuilder />} />
-            <Route path="/word-scramble" element={<WordScramble />} />
-            <Route path="/fill-blank" element={<FillInTheBlank />} />
+            <Route path="/games/vocabulary-builder" element={<VocabularyBuilder />} />
+            <Route path="/games/word-scramble" element={<WordScramble />} />
+            <Route path="/games/fill-blank" element={<FillInTheBlank />} />
 
             {/* Payment & Store Routes */}
             <Route path="/donate" element={<Donate />} />

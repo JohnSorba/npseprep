@@ -6,9 +6,9 @@ const Games = () => {
         { id: 'brain-tug', name: 'Brain Tug', description: 'Two-player tug-of-war! Answer questions faster to pull your opponent across the line.', icon: '🪢', color: '#E74C3C', path: '/games/brain-tug', ready: true },
         { id: 'match-link', name: 'Match & Link', description: 'Improve understanding by matching definitions, examples, and processes.', icon: '🔗', color: '#3B82F6', path: '/games/match-link', ready: true },
         { id: 'spot-mistake', name: 'Spot the Mistake', description: 'Train deeper understanding by identifying errors in worked solutions.', icon: '🔍', color: '#EF4444', path: '/games/spot-mistake', ready: true },
-        { id: 'vocabulary-builder', name: 'Vocabulary Builder', description: 'Master 180 essential words from Schonell\'s Spelling List to boost your English scores.', icon: '📖', color: '#8B5CF6', path: '/vocabulary-builder', ready: true },
-        { id: 'word-scramble', name: 'Word Scramble', description: 'Untangle the letters to find the correct spelling of essential words.', icon: '🧩', color: '#10B981', path: '/word-scramble', ready: true },
-        { id: 'fill-blank', name: 'Fill in the Blank', description: 'Complete the spelling by filling in the missing letters.', icon: '✍️', color: '#6366f1', path: '/fill-blank', ready: true },
+        { id: 'vocabulary-builder', name: 'Vocabulary Builder', description: 'Master 180 essential words from Schonell\'s Spelling List to boost your English scores.', icon: '📖', color: '#8B5CF6', path: '/games/vocabulary-builder', ready: true },
+        { id: 'word-scramble', name: 'Word Scramble', description: 'Untangle the letters to find the correct spelling of essential words.', icon: '🧩', color: '#10B981', path: '/games/word-scramble', ready: true },
+        { id: 'fill-blank', name: 'Fill in the Blank', description: 'Complete the spelling by filling in the missing letters.', icon: '✍️', color: '#6366f1', path: '/games/fill-blank', ready: true },
     ];
 
     return (
