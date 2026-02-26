@@ -24,16 +24,16 @@ const NAV = [
             { label: 'Mock Exams', href: '/mock-exams' },
         ],
     },
-    {
-        label: 'Resources',
-        description: 'Printable help and study tools.',
-        links: [
-            { label: 'Study Tips', href: '/study-tips' },
-            { label: 'Curriculum', href: '/curriculum-resources' },
-            { label: 'Blog', href: '/blog' },
-            // { label: 'Store', href: '/store' },
-        ],
-    },
+    // {
+    //     label: 'Resources',
+    //     description: 'Printable help and study tools.',
+    //     links: [
+    //         { label: 'Study Tips', href: '/study-tips' },
+    //         { label: 'Curriculum', href: '/curriculum-resources' },
+    //         { label: 'Blog', href: '/blog' },
+    //         { label: 'Store', href: '/store' },
+    //     ],
+    // },
     {
         label: 'Parents',
         description: 'Support your child with confidence.',
@@ -48,8 +48,8 @@ const NAV = [
         links: [
             { label: 'About Us', href: '/about' },
             { label: 'Our Mission', href: '/about' },
-            { label: 'Contact', href: '/about' },
-            { label: 'Blog', href: '/blog' },
+            // { label: 'Contact', href: '/about' },
+            // { label: 'Blog', href: '/blog' },
         ],
     },
 ];

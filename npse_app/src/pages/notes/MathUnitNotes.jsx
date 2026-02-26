@@ -392,8 +392,13 @@ const MathUnitNotes = () => {
                                 <div key={i} className="angle-card" style={{ borderColor: angle.color }}>
                                     <svg viewBox="0 0 60 60" className="angle-svg">
                                         <line x1="30" y1="50" x2="55" y2="50" stroke={angle.color} strokeWidth="2" />
-                                        <line x1="30" y1="50" x2={30 + 25 * Math.cos((90 - angle.example) * Math.PI / 180)} y2={50 - 25 * Math.sin((90 - angle.example) * Math.PI / 180)} stroke={angle.color} strokeWidth="2" />
-                                        <path d={`M 40 50 A 10 10 0 0 0 ${30 + 10 * Math.cos((90 - angle.example) * Math.PI / 180)} ${50 - 10 * Math.sin((90 - angle.example) * Math.PI / 180)}`} fill="none" stroke={angle.color} strokeWidth="1.5" />
+                                        <line x1="30" y1="50" x2={30 + 25 * Math.cos(angle.example * Math.PI / 180)} y2={50 - 25 * Math.sin(angle.example * Math.PI / 180)} stroke={angle.color} strokeWidth="2" />
+                                        <path
+                                            d={`M ${30 + 12 * Math.cos(0)} ${50 - 12 * Math.sin(0)} A 12 12 0 ${angle.example > 180 ? 1 : 0} 0 ${30 + 12 * Math.cos(angle.example * Math.PI / 180)} ${50 - 12 * Math.sin(angle.example * Math.PI / 180)}`}
+                                            fill="none"
+                                            stroke={angle.color}
+                                            strokeWidth="1.5"
+                                        />
                                     </svg>
                                     <div className="angle-name">{angle.type}</div>
                                     <div className="angle-range">{angle.range}</div>
@@ -678,6 +683,23 @@ const MathUnitNotes = () => {
                                     <p>{lineType.description}</p>
                                 </div>
                             ))}
+                        </div>
+                    </div>
+                );
+            case 'straight-line-angles':
+                return (
+                    <div className="diagram-straight-line">
+                        <div className="diagram-title">{data.title}</div>
+                        <div className="shape-container">
+                            <svg viewBox="0 0 160 100" className="shape-svg">
+                                <line x1="10" y1="75" x2="150" y2="75" stroke="#1e293b" strokeWidth="3" strokeLinecap="round" />
+                                <line x1="80" y1="75" x2="110" y2="30" stroke="#1e293b" strokeWidth="3" strokeLinecap="round" />
+                                <path d="M 105 75 A 25 25 0 0 0 94 56.5" fill="none" stroke="#4f46e5" strokeWidth="2" />
+                                <path d="M 94 56.5 A 25 25 0 0 0 55 75" fill="none" stroke="#0ea5e9" strokeWidth="2" />
+                                <text x="55" y="55" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#0ea5e9">{data.angles[0]?.value || 'a'}</text>
+                                <text x="105" y="60" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#4f46e5">{data.angles[1]?.value || 'b'}</text>
+                                <text x="80" y="95" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#64748b">{data.angles[0]?.value || 'a'} + {data.angles[1]?.value || 'b'} = {data.sum || '180°'}</text>
+                            </svg>
                         </div>
                     </div>
                 );

@@ -9,9 +9,9 @@ import generalPaperQuizQuestions from '../../data/generalPaperQuizQuestions';
 /* ================================================================
    CONSTANTS
 ================================================================ */
-const WIN_THRESHOLD = 50;
+const WIN_THRESHOLD = 70;
 const STEP_SIZE = 10;
-const GAME_TIME = 120; // seconds
+const GAME_TIME = 150; // seconds
 const IDLE_PAUSE_THRESHOLD = 10; // seconds
 
 /* ================================================================
@@ -147,7 +147,7 @@ const Arena = ({ position, winner, p1Score, p2Score, timer, onResume, isPaused }
                     <div className="tow-winner-overlay">
                         <div className="tow-winner-card">
                             <span className="tow-trophy">🏆</span>
-                            <h2>Team {winner} Wins!</h2>
+                            <h2>Player {winner} Wins!</h2>
                         </div>
                     </div>
                 )}
@@ -473,6 +473,18 @@ export default function TugOfWar() {
                 </div>
             </div>
 
+            {phase === 'finished' && (
+                <div className="tow-endgame-cta">
+                    <button className="tow-btn-play-again" onClick={() => startGame(selectedSubject, questionMode)}>
+                        🔄 Rematch
+                    </button>
+                    <button className="tow-btn-change" onClick={() => setPhase('select')}>
+                        📚 Change Subject
+                    </button>
+                    <Link to="/games" className="tow-btn-secondary">← All Games</Link>
+                </div>
+            )}
+
             <div className="tow-game-layout">
                 <TeamPanel
                     team="blue"
@@ -503,17 +515,7 @@ export default function TugOfWar() {
                 />
             </div>
 
-            {phase === 'finished' && (
-                <div className="tow-endgame-cta">
-                    <button className="tow-btn-play-again" onClick={() => startGame(selectedSubject, questionMode)}>
-                        🔄 Rematch
-                    </button>
-                    <button className="tow-btn-change" onClick={() => setPhase('select')}>
-                        📚 Change Subject
-                    </button>
-                    <Link to="/games" className="tow-btn-secondary">← All Games</Link>
-                </div>
-            )}
+
         </div>
     );
 }

@@ -274,11 +274,11 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div style={{ textAlign: 'center', marginTop: 'var(--space-8)' }}>
+                    {/* <div style={{ textAlign: 'center', marginTop: 'var(--space-8)' }}>
                         <Link to="/mock-exams" className="hero-cta hero-cta--primary" style={{ background: 'var(--color-green)' }}>
                             Learn More About Mock Exams
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </section>
 
@@ -343,7 +343,7 @@ const Home = () => {
             {/* ═══════════════════════════════════════════════════════════
                  6. STUDY SUPPORT — Blog / Articles / Exam Tips
                 ═══════════════════════════════════════════════════════════ */}
-            <section className="platform-section">
+            {/* <section className="platform-section">
                 <div className="container">
                     <div className="platform-section__header">
                         <p className="platform-section__eyebrow">Study Support</p>
@@ -370,7 +370,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* ═══════════════════════════════════════════════════════════
                  7. RESOURCES

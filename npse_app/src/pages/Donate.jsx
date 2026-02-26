@@ -160,9 +160,9 @@ export default function Donate() {
                             </ol>
                         </div>
 
-                        <div className="support-contact">
+                        {/* <div className="support-contact">
                             <p>Need help or want to donate a different way? <Link to="/about" style={{ color: 'var(--pay-primary)', fontWeight: '600' }}>Contact us</Link></p>
-                        </div>
+                        </div> */}
                     </div>
 
                     {/* Original donation form commented out for future reactivation */}
