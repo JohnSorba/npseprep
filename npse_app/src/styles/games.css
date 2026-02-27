@@ -864,6 +864,8 @@
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     overflow: hidden;
     border: 1px solid #e5e7eb;
+    position: relative;
+    z-index: 10;
 }
 
 .tow-scoreboard {
@@ -928,7 +930,7 @@
 .tow-arena {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 350px;
     background: white;
     overflow: hidden;
 }
@@ -944,78 +946,59 @@
     z-index: 2;
 }
 
-.tow-rope-group {
+.tow-image-container {
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
-    transition: left 0.4s ease;
+    justify-content: center;
+    transition: left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 3;
+    width: 600px;
+    /* Large base size */
 }
 
-.tow-team-sprites {
+.tow-main-image-wrap {
+    width: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
-.tow-team-left {
-    flex-direction: row;
-}
-
-.tow-team-right {
-    flex-direction: row-reverse;
-}
-
-.tow-sprite {
-    width: 65px;
+.tow-main-image {
+    width: 100%;
     height: auto;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
-    flex-shrink: 0;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
 }
 
 @keyframes towCelebrate {
 
     0%,
     100% {
-        transform: scaleX(var(--dir, 1)) translateY(0);
+        transform: translateY(0) scale(1);
     }
 
-    25% {
-        transform: scaleX(var(--dir, 1)) translateY(-6px);
-    }
-
-    75% {
-        transform: scaleX(var(--dir, 1)) translateY(-3px);
+    50% {
+        transform: translateY(-20px) scale(1.05);
     }
 }
 
 .tow-winner {
-    animation: towCelebrate 0.5s ease-in-out 3;
+    animation: towCelebrate 0.6s ease-in-out infinite;
+    z-index: 5;
 }
 
-.tow-rope {
-    width: 80px;
-    height: 6px;
-    background: repeating-linear-gradient(90deg, #8B6914 0px, #8B6914 3px, #6B4F12 3px, #6B4F12 6px);
-    border-radius: 3px;
-    position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    flex-shrink: 0;
-    z-index: 4;
-}
-
-.tow-knot {
+.tow-center-line {
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 14px solid #E74C3C;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: repeating-linear-gradient(to bottom, #ddd 0px, #ddd 10px, transparent 10px, transparent 20px);
+    transform: translateX(-50%);
+    z-index: 2;
+    opacity: 0.5;
 }
 
 .tow-winner-overlay {
@@ -1026,40 +1009,77 @@
     align-items: center;
     justify-content: center;
     animation: towFadeIn 0.3s ease;
-    z-index: 10;
+    z-index: 100;
+    /* Relative to arena */
     backdrop-filter: blur(4px);
 }
 
-@keyframes towFadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+.tow-pause-overlay-fixed {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: towFadeIn 0.3s ease;
+    z-index: 10000;
+    /* Absolute top level */
+    backdrop-filter: blur(8px);
+    padding: var(--space-4);
 }
 
 .tow-winner-card {
     background: white;
-    border: 2px solid #e5e7eb;
-    padding: var(--space-4) var(--space-8);
-    border-radius: var(--radius-2xl);
+    border: 3px solid #e5e7eb;
+    padding: var(--space-8);
+    border-radius: var(--radius-3xl);
     text-align: center;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 100%;
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+    .tow-winner-card {
+        padding: var(--space-4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .tow-trophy {
+        font-size: 1.5rem !important;
+        margin: 0 !important;
+    }
+
+    .tow-winner-card h2 {
+        font-size: 1.2rem !important;
+        margin: 0 !important;
+    }
+
+    .tow-winner-card p {
+        font-size: 12px !important;
+        margin: 0 !important;
+    }
+
+    .tow-btn-play-again {
+        margin-top: 10px !important;
+        padding: 5px 20px !important;
+    }
 }
 
 .tow-trophy {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     display: block;
-    margin-bottom: var(--space-1);
+    margin-bottom: var(--space-2);
 }
 
 .tow-winner-card h2 {
     font-family: 'Patrick Hand', cursive;
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: #333;
-    margin: 0;
+    margin-bottom: var(--space-2);
 }
 
 
@@ -1322,115 +1342,34 @@
     }
 
     .tow-arena {
-        height: 170px;
+        height: 250px;
     }
 
-    .tow-sprite {
-        width: 45px;
+    .tow-image-container {
+        width: 100%;
+        max-width: 450px;
     }
 
-    .tow-rope {
-        width: 50px;
-    }
-
-    .tow-scoreboard {
-        padding: var(--space-2) var(--space-3);
-    }
-
-    .tow-sb-score {
-        font-size: 1.4rem;
-    }
-
-    .tow-sb-time {
-        font-size: 0.9rem;
-    }
-
-    .tow-tp-header {
-        padding: var(--space-2) var(--space-3);
-    }
-
-    .tow-tp-body {
-        padding: var(--space-3);
-    }
-
-    .tow-tp-prompt {
-        font-size: 12px;
-        min-height: 32px;
-        margin-bottom: var(--space-3);
-    }
-
-    .tow-tp-opt {
-        padding: var(--space-2) var(--space-3);
-        font-size: 12px;
-        gap: var(--space-2);
-    }
-
-    .tow-tp-opt-letter {
-        width: 24px;
-        height: 24px;
-        font-size: 10px;
-    }
-
-    .tow-tp-badge {
-        width: 26px;
-        height: 26px;
-        font-size: var(--text-sm);
-    }
-
-    .tow-tp-name {
-        font-size: var(--text-sm);
-    }
-
-    .tow-endgame-cta {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .tow-select-screen {
-        padding: var(--space-5) var(--space-4);
-    }
-
-    .tow-subject-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-3);
-    }
-
-    .tow-subject-card {
-        padding: var(--space-4) var(--space-3);
-    }
-
-    .tow-subj-icon {
-        font-size: 1.6rem;
-    }
-
-    .tow-subj-name {
-        font-size: var(--text-sm);
+    .tow-main-image {
+        width: 100%;
     }
 }
 
 @media (max-width: 400px) {
     .tow-arena {
-        height: 140px;
+        height: 200px;
     }
+}
 
-    .tow-sprite {
-        width: 38px;
-    }
+.tow-tp-opt {
+    padding: 6px 8px;
+    font-size: 11px;
+}
 
-    .tow-rope {
-        width: 34px;
-    }
-
-    .tow-tp-opt {
-        padding: 6px 8px;
-        font-size: 11px;
-    }
-
-    .tow-tp-opt-letter {
-        width: 20px;
-        height: 20px;
-        font-size: 9px;
-    }
+.tow-tp-opt-letter {
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
 }
 
 
@@ -1486,12 +1425,13 @@
         min-height: 120px;
     }
 
-    .tow-sprite {
-        width: 40px;
+    .tow-image-container {
+        width: 100%;
+        max-width: 300px;
     }
 
-    .tow-rope {
-        width: 40px;
+    .tow-main-image {
+        width: 100%;
     }
 
     .tow-scoreboard {

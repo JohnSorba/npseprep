@@ -8,7 +8,7 @@ import generalPaperQuizQuestions from '../../data/generalPaperQuizQuestions';
 
 /* ================================================================
    CONSTANTS
-================================================================ */
+ ================================================================ */
 const WIN_THRESHOLD = 70;
 const STEP_SIZE = 10;
 const GAME_TIME = 150; // seconds
@@ -16,7 +16,7 @@ const IDLE_PAUSE_THRESHOLD = 10; // seconds
 
 /* ================================================================
    SUBJECT CONFIG
-================================================================ */
+ ================================================================ */
 const SUBJECT_OPTIONS = [
     { id: 'mathematics', name: 'Mathematics', icon: '📐', color: '#0c8ce9', questions: mathQuizQuestions },
     { id: 'english', name: 'English Language', icon: '📝', color: '#e67e22', questions: englishLanguageQuizQuestions },
@@ -27,80 +27,28 @@ const SUBJECT_OPTIONS = [
 
 /* ================================================================
    HELPERS
-================================================================ */
+ ================================================================ */
 const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
 /* ================================================================
-   SVG HUMAN SPRITE
-================================================================ */
-const HumanSprite = ({ team, variant = 0, isWinner }) => {
-    const isBlue = team === 'blue';
-    const faceDir = isBlue ? 1 : -1;
-
-    const skinTones = ['#F5CBA7', '#D2B48C', '#C68642', '#FFDBAC'];
-    const skinColor = skinTones[(isBlue ? 0 : 1) + variant];
-
-    const shirtColor = isBlue ? '#2980B9' : '#E74C3C';
-    const shirtPattern = isBlue ? '#1F6FA3' : '#C0392B';
-    const pantsColor = isBlue ? '#1A5276' : '#922B21';
-    const hairColor = variant === 0 ? '#2C1810' : '#1A1A2E';
-    const headband = isBlue ? '#3498DB' : '#E74C3C';
-    const shoeColor = isBlue ? '#2471A3' : '#E74C3C';
-
+   TUG OF WAR IMAGE (Single Asset)
+   ================================================================ */
+const TugImage = ({ isWinner }) => {
     return (
-        <svg
-            viewBox="0 0 120 180"
-            className={`tow-sprite ${isWinner ? 'tow-winner' : ''}`}
-            style={{ transform: `scaleX(${faceDir})` }}
-        >
-            <ellipse cx="60" cy="24" rx="22" ry="10" fill={headband} />
-            <rect x="38" y="18" width="44" height="8" fill={headband} rx="2" />
-            {isBlue ? (
-                <path d="M82 22 Q90 18 95 25 Q88 28 82 22Z" fill={headband} opacity="0.8" />
-            ) : (
-                <path d="M38 22 Q30 18 25 25 Q32 28 38 22Z" fill={headband} opacity="0.8" />
-            )}
-            <ellipse cx="60" cy="26" rx="20" ry="16" fill={hairColor} />
-            <ellipse cx="60" cy="32" rx="16" ry="16" fill={skinColor} />
-            <circle cx="53" cy="29" r="2.5" fill="#2C3E50" />
-            <circle cx="67" cy="29" r="2.5" fill="#2C3E50" />
-            <circle cx="53.8" cy="28.2" r="0.8" fill="white" />
-            <circle cx="67.8" cy="28.2" r="0.8" fill="white" />
-            <line x1="49" y1="24" x2="56" y2="25" stroke={hairColor} strokeWidth="1.5" strokeLinecap="round" />
-            <line x1="64" y1="25" x2="71" y2="24" stroke={hairColor} strokeWidth="1.5" strokeLinecap="round" />
-            {isWinner ? (
-                <path d="M53 38 Q60 46 67 38" fill="none" stroke="#E74C3C" strokeWidth="2" strokeLinecap="round" />
-            ) : (
-                <path d="M55 38 Q60 40 65 38" fill="none" stroke="#C0392B" strokeWidth="1.5" strokeLinecap="round" />
-            )}
-            <rect x="55" y="46" width="10" height="6" fill={skinColor} rx="3" />
-            <path d="M38 55 Q38 52 48 50 L72 50 Q82 52 82 55 L84 100 Q84 104 60 106 Q36 104 36 100 Z" fill={shirtColor} />
-            <line x1="45" y1="55" x2="55" y2="95" stroke={shirtPattern} strokeWidth="3" opacity="0.3" />
-            <line x1="55" y1="55" x2="65" y2="95" stroke={shirtPattern} strokeWidth="3" opacity="0.3" />
-            <line x1="65" y1="55" x2="75" y2="95" stroke={shirtPattern} strokeWidth="3" opacity="0.3" />
-            <path d="M52 50 L60 58 L68 50" fill="none" stroke={shirtPattern} strokeWidth="2" />
-            <path d={`M${isBlue ? 38 : 82} 62 Q${isBlue ? 14 : 106} 66 ${isBlue ? -5 : 125} 72`} fill="none" stroke={skinColor} strokeWidth="9" strokeLinecap="round" />
-            <circle cx={isBlue ? -5 : 125} cy="72" r="6" fill={skinColor} />
-            <circle cx={isBlue ? -3 : 123} cy="69" r="2.5" fill={skinColor} />
-            <circle cx={isBlue ? 0 : 120} cy="71" r="2.5" fill={skinColor} />
-            <path d={`M${isBlue ? 82 : 38} 62 Q${isBlue ? 94 : 26} 80 ${isBlue ? 88 : 32} 95`} fill="none" stroke={skinColor} strokeWidth="8" strokeLinecap="round" />
-            <circle cx={isBlue ? 88 : 32} cy="95" r="5" fill={skinColor} />
-            <rect x="36" y="98" width="48" height="6" rx="3" fill="#5D4037" />
-            <rect x="56" y="97" width="8" height="8" rx="2" fill="#8D6E63" />
-            <path d="M46 104 L30 145 L24 165" fill="none" stroke={pantsColor} strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M74 104 L85 145 L90 165" fill="none" stroke={pantsColor} strokeWidth="11" strokeLinecap="round" strokeLinejoin="round" />
-            <ellipse cx="20" cy="170" rx="12" ry="6" fill={shoeColor} />
-            <ellipse cx="94" cy="170" rx="12" ry="6" fill={shoeColor} />
-            <ellipse cx="16" cy="168" rx="4" ry="3" fill="white" opacity="0.3" />
-            <ellipse cx="90" cy="168" rx="4" ry="3" fill="white" opacity="0.3" />
-        </svg>
+        <div className={`tow-main-image-wrap ${isWinner ? 'tow-winner' : ''}`}>
+            <img
+                src="/brain_tug_img.png"
+                alt="Brain Tug of War"
+                className="tow-main-image"
+            />
+        </div>
     );
 };
 
 /* ================================================================
    ARENA
-================================================================ */
-const Arena = ({ position, winner, p1Score, p2Score, timer, onResume, isPaused }) => {
+ ================================================================ */
+const Arena = ({ position, winner, p1Score, p2Score, timer }) => {
     const clamped = Math.max(-50, Math.min(50, position));
     const pct = 50 + clamped;
 
@@ -129,18 +77,8 @@ const Arena = ({ position, winner, p1Score, p2Score, timer, onResume, isPaused }
 
             <div className="tow-arena">
                 <div className="tow-center-line" />
-                <div className="tow-rope-group" style={{ left: `${pct}%` }}>
-                    <div className="tow-team-sprites tow-team-left">
-                        <HumanSprite team="blue" variant={0} isWinner={winner === 1} />
-                        <HumanSprite team="blue" variant={1} isWinner={winner === 1} />
-                    </div>
-                    <div className="tow-rope">
-                        <div className="tow-knot" />
-                    </div>
-                    <div className="tow-team-sprites tow-team-right">
-                        <HumanSprite team="red" variant={0} isWinner={winner === 2} />
-                        <HumanSprite team="red" variant={1} isWinner={winner === 2} />
-                    </div>
+                <div className="tow-image-container" style={{ left: `${pct}%` }}>
+                    <TugImage isWinner={!!winner} />
                 </div>
 
                 {winner && (
@@ -151,19 +89,6 @@ const Arena = ({ position, winner, p1Score, p2Score, timer, onResume, isPaused }
                         </div>
                     </div>
                 )}
-
-                {isPaused && !winner && (
-                    <div className="tow-winner-overlay">
-                        <div className="tow-winner-card tow-pause-card">
-                            <span className="tow-trophy">💤</span>
-                            <h2>Napping?</h2>
-                            <p>No activity detected. Tap continue to resume.</p>
-                            <button className="tow-btn-play-again" onClick={onResume} style={{ marginTop: '20px' }}>
-                                ▶️ Continue
-                            </button>
-                        </div>
-                    </div>
-                )}
             </div>
         </div>
     );
@@ -171,7 +96,7 @@ const Arena = ({ position, winner, p1Score, p2Score, timer, onResume, isPaused }
 
 /* ================================================================
    TEAM PANEL
-================================================================ */
+ ================================================================ */
 const TeamPanel = ({ team, score, question, onAnswer, disabled, feedback }) => {
     if (!question) return <div className={`tow-team-panel tow-tp-${team}`} />;
     const isBlue = team === 'blue';
@@ -207,7 +132,7 @@ const TeamPanel = ({ team, score, question, onAnswer, disabled, feedback }) => {
 
 /* ================================================================
    MAIN COMPONENT
-================================================================ */
+ ================================================================ */
 export default function TugOfWar() {
     const [phase, setPhase] = useState('select');
     const [selectedSubject, setSelectedSubject] = useState(null);
@@ -501,8 +426,6 @@ export default function TugOfWar() {
                     p1Score={p1Score}
                     p2Score={p2Score}
                     timer={timer}
-                    isPaused={isPaused}
-                    onResume={resumeGame}
                 />
 
                 <TeamPanel
@@ -515,7 +438,19 @@ export default function TugOfWar() {
                 />
             </div>
 
-
+            {/* Only the pause overlay remains fixed at the top level */}
+            {isPaused && !winner && (
+                <div className="tow-pause-overlay-fixed">
+                    <div className="tow-winner-card tow-pause-card">
+                        <span className="tow-trophy">💤</span>
+                        <h2>Napping?</h2>
+                        <p>Join the tug of war! Tap continue to resume.</p>
+                        <button className="tow-btn-play-again" onClick={resumeGame} style={{ marginTop: '20px' }}>
+                            ▶️ Continue
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
