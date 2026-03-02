@@ -215,7 +215,9 @@ const Navbar = () => {
                         onClick={() => setMobileMenuOpen(true)}
                         aria-label="Open menu"
                     >
-                        <span /><span /><span />
+                        <span style={{ background: 'var(--color-green)' }} />
+                        <span style={{ background: '#FFFFFF' }} />
+                        <span style={{ background: 'var(--color-blue)' }} />
                     </button>
                 </div>
             </header>
@@ -271,7 +273,7 @@ const Navbar = () => {
                         </>
                     ) : (
                         <>
-                            <Link to="/login" className="header-btn header-btn--secondary header-btn--full" onClick={() => setMobileMenuOpen(false)}>Sign in</Link>
+                            {/* <Link to="/login" className="header-btn header-btn--secondary header-btn--full" onClick={() => setMobileMenuOpen(false)}>Sign in</Link> */}
                             <Link to="/quiz" className="header-btn header-btn--primary header-btn--full" onClick={() => setMobileMenuOpen(false)}>Start practising</Link>
                         </>
                     )}

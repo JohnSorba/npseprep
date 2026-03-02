@@ -761,17 +761,18 @@ p {
   width: 40px;
   height: 40px;
   padding: 8px;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
-  background: none;
+  background: var(--color-ink);
+  /* Dark bg so the white bar is visible */
   cursor: pointer;
 }
 
 .header-hamburger span {
   display: block;
-  height: 2px;
-  background: var(--color-ink);
+  height: 2.5px;
   border-radius: 1px;
+  /* background set per-span via inline style (green / white / blue) */
 }
 
 @media (min-width: 769px) {
