@@ -82,7 +82,7 @@ const Home = () => {
                         </p>
                         <div className="cinematic-hero__ctas">
                             <Link to="/quiz" className="hero-cta hero-cta--primary">Start Free Practice</Link>
-                            <Link to="/notes" className="hero-cta hero-cta--secondary">Browse Study Notes</Link>
+                            <Link to="/donate" className="hero-cta hero-cta--secondary">Support Us</Link>
                         </div>
                     </div>
                 </div>
