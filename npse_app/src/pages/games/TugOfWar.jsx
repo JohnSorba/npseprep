@@ -9,7 +9,7 @@ import generalPaperQuizQuestions from '../../data/generalPaperQuizQuestions';
 /* ================================================================
    CONSTANTS
  ================================================================ */
-const WIN_THRESHOLD = 70;
+const WIN_THRESHOLD = 50;
 const STEP_SIZE = 10;
 const GAME_TIME = 150; // seconds
 const IDLE_PAUSE_THRESHOLD = 10; // seconds

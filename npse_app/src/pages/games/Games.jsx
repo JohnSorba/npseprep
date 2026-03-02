@@ -9,6 +9,11 @@ const Games = () => {
         { id: 'vocabulary-builder', name: 'Vocabulary Builder', description: 'Master 180 essential words from Schonell\'s Spelling List to boost your English scores.', icon: '📖', color: '#8B5CF6', path: '/games/vocabulary-builder', ready: true },
         { id: 'word-scramble', name: 'Word Scramble', description: 'Untangle the letters to find the correct spelling of essential words.', icon: '🧩', color: '#10B981', path: '/games/word-scramble', ready: true },
         { id: 'fill-blank', name: 'Fill in the Blank', description: 'Complete the spelling by filling in the missing letters.', icon: '✍️', color: '#6366f1', path: '/games/fill-blank', ready: true },
+        { id: 'shape-match', name: 'Shape Match', description: 'Rotate, mirror and flip — test your spatial reasoning with shape transformation challenges.', icon: '🔷', color: '#0ea5e9', path: '/games/shape-match', ready: true },
+        // { id: 'pattern-completion', name: 'Pattern Completion', description: 'Study a 3×3 matrix and find the missing piece — shape, colour and count rules await!', icon: '🔲', color: '#a855f7', path: '/games/pattern-completion', ready: true },
+        { id: 'number-sequences', name: 'Number Sequences', description: 'Spot the rule and find the hidden number in arithmetic, Fibonacci, square and alternating sequences.', icon: '🔢', color: '#06b6d4', path: '/games/number-sequences', ready: true },
+        { id: 'clock-angles', name: 'Clock Angles', description: 'Calculate angles between clock hands, read times and identify clocks — geometry meets timekeeping!', icon: '🕐', color: '#f43f5e', path: '/games/clock-angles', ready: true },
+        { id: 'fraction-visualizer', name: 'Fraction Visualizer', description: 'Identify fractions from pie charts and bar models, compare them and find equivalent ones.', icon: '🥧', color: '#f97316', path: '/games/fraction-visualizer', ready: true },
     ];
 
     return (

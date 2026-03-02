@@ -53,6 +53,11 @@ import SpotTheMistake from './pages/games/SpotTheMistake';
 import VocabularyBuilder from './pages/games/VocabularyBuilder';
 import WordScramble from './pages/games/WordScramble';
 import FillInTheBlank from './pages/games/FillInTheBlank';
+import ShapeMatch from './pages/games/ShapeMatch';
+// import PatternCompletion from './pages/games/PatternCompletion';
+import NumberSequences from './pages/games/NumberSequences';
+import ClockAngles from './pages/games/ClockAngles';
+import FractionVisualizer from './pages/games/FractionVisualizer';
 
 // Styles
 import './styles/index.css';
@@ -94,6 +99,11 @@ function App() {
             <Route path="/games/vocabulary-builder" element={<VocabularyBuilder />} />
             <Route path="/games/word-scramble" element={<WordScramble />} />
             <Route path="/games/fill-blank" element={<FillInTheBlank />} />
+            <Route path="/games/shape-match" element={<ShapeMatch />} />
+            {/* <Route path="/games/pattern-completion" element={<PatternCompletion />} /> */}
+            <Route path="/games/number-sequences" element={<NumberSequences />} />
+            <Route path="/games/clock-angles" element={<ClockAngles />} />
+            <Route path="/games/fraction-visualizer" element={<FractionVisualizer />} />
 
             {/* Payment & Store Routes */}
             <Route path="/donate" element={<Donate />} />

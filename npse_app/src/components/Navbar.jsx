@@ -190,7 +190,7 @@ const Navbar = () => {
 
                     {/* Right – Actions */}
                     <div className="header-actions">
-                        {user ? (
+                        {/* {user ? (
                             <>
                                 <Link to="/dashboard" className="header-btn header-btn--secondary">
                                     Dashboard
@@ -203,7 +203,7 @@ const Navbar = () => {
                             <Link to="/login" className="header-btn header-btn--secondary">
                                 Sign in
                             </Link>
-                        )}
+                        )} */}
                         <Link to="/quiz" className="header-btn header-btn--primary">
                             Start practising
                         </Link>
