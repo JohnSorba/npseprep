@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 // Layout components
 import Navbar from './components/Navbar';
@@ -68,88 +68,97 @@ import './styles/games.css';
 import './styles/Payments.css';
 import './styles/Quiz.css';
 
+function AppContent() {
+  const location = useLocation();
+  const isDashboard = location.pathname.startsWith('/dashboard') || location.pathname.startsWith('/admin');
+
+  return (
+    <div className="app">
+      {!isDashboard && <Navbar />}
+      <main>
+        <Routes>
+          {/* Auth Routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/pupil" element={<PupilHome />} />
+          <Route path="/dashboard/pupil/:subjectId" element={<PupilDashboard />} />
+          <Route path="/dashboard/parent" element={<ParentDashboard />} />
+          <Route path="/admin" element={<AdminPanel />} />
+
+          {/* Core Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/subjects/:subjectId" element={<SubjectDetail />} />
+          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/quiz/:subjectId" element={<Quiz />} />
+          <Route path="/mock-exams" element={<MockExams />} />
+          <Route path="/study-tips" element={<StudyTips />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/curriculum-resources" element={<CurriculumResources />} />
+          <Route path="/blog" element={<Blog />} />
+
+          {/* Games Routes */}
+          <Route path="/games" element={<Games />} />
+          <Route path="/games/rapid-recall" element={<RapidRecall />} />
+          <Route path="/games/brain-tug" element={<TugOfWar />} />
+          <Route path="/games/match-link" element={<MatchAndLink />} />
+          <Route path="/games/spot-mistake" element={<SpotTheMistake />} />
+          <Route path="/games/vocabulary-builder" element={<VocabularyBuilder />} />
+          <Route path="/games/word-scramble" element={<WordScramble />} />
+          <Route path="/games/fill-blank" element={<FillInTheBlank />} />
+          <Route path="/games/shape-match" element={<ShapeMatch />} />
+          {/* <Route path="/games/pattern-completion" element={<PatternCompletion />} /> */}
+          <Route path="/games/number-sequences" element={<NumberSequences />} />
+          <Route path="/games/clock-angles" element={<ClockAngles />} />
+          <Route path="/games/fraction-visualizer" element={<FractionVisualizer />} />
+
+          {/* Payment & Store Routes */}
+          <Route path="/donate" element={<Donate />} />
+          {/* <Route path="/store" element={<Store />} /> */}
+          <Route path="/payment/success" element={<PaymentStatus />} />
+          <Route path="/payment/pending" element={<PaymentStatus />} />
+          <Route path="/payment/failed" element={<PaymentStatus />} />
+
+          {/* Notes Routes */}
+          <Route path="/notes" element={<Notes />} />
+
+          {/* General Paper Notes */}
+          <Route path="/notes/general-paper" element={<GeneralPaperNotes />} />
+          <Route path="/notes/general-paper/:subjectId" element={<GPSubjectNotes />} />
+          <Route path="/notes/general-paper/:subjectId/:unitId" element={<GPUnitNotes />} />
+
+          {/* English Language Notes */}
+          <Route path="/notes/english-language" element={<EnglishLanguageNotes />} />
+          <Route path="/notes/english-language/:subjectId" element={<ELSubjectNotes />} />
+          <Route path="/notes/english-language/:subjectId/:unitId" element={<ELUnitNotes />} />
+
+          {/* Quantitative Aptitude Notes */}
+          <Route path="/notes/quantitative" element={<QuantitativeNotes />} />
+          <Route path="/notes/quantitative/:subjectId" element={<QASubjectNotes />} />
+          <Route path="/notes/quantitative/:subjectId/:unitId" element={<QAUnitNotes />} />
+
+          {/* Verbal Aptitude Notes */}
+          <Route path="/notes/verbal" element={<VerbalNotes />} />
+          <Route path="/notes/verbal/:subjectId" element={<VASubjectNotes />} />
+          <Route path="/notes/verbal/:subjectId/:unitId" element={<VAUnitNotes />} />
+
+          {/* Mathematics Notes */}
+          <Route path="/notes/mathematics" element={<MathNotes />} />
+          <Route path="/notes/mathematics/:subjectId" element={<MathSubjectNotes />} />
+          <Route path="/notes/mathematics/:subjectId/:unitId" element={<MathUnitNotes />} />
+        </Routes>
+      </main>
+      {!isDashboard && <Footer />}
+      <MascotHelper />
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="app">
-        <Navbar />
-        <main>
-          <Routes>
-            {/* Auth Routes */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/dashboard/pupil" element={<PupilHome />} />
-            <Route path="/dashboard/pupil/:subjectId" element={<PupilDashboard />} />
-            <Route path="/dashboard/parent" element={<ParentDashboard />} />
-            <Route path="/admin" element={<AdminPanel />} />
-
-            {/* Core Routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/subjects/:subjectId" element={<SubjectDetail />} />
-            <Route path="/quiz" element={<Quiz />} />
-            <Route path="/quiz/:subjectId" element={<Quiz />} />
-            <Route path="/mock-exams" element={<MockExams />} />
-            <Route path="/study-tips" element={<StudyTips />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/curriculum-resources" element={<CurriculumResources />} />
-            <Route path="/blog" element={<Blog />} />
-
-            {/* Games Routes */}
-            <Route path="/games" element={<Games />} />
-            <Route path="/games/rapid-recall" element={<RapidRecall />} />
-            <Route path="/games/brain-tug" element={<TugOfWar />} />
-            <Route path="/games/match-link" element={<MatchAndLink />} />
-            <Route path="/games/spot-mistake" element={<SpotTheMistake />} />
-            <Route path="/games/vocabulary-builder" element={<VocabularyBuilder />} />
-            <Route path="/games/word-scramble" element={<WordScramble />} />
-            <Route path="/games/fill-blank" element={<FillInTheBlank />} />
-            <Route path="/games/shape-match" element={<ShapeMatch />} />
-            {/* <Route path="/games/pattern-completion" element={<PatternCompletion />} /> */}
-            <Route path="/games/number-sequences" element={<NumberSequences />} />
-            <Route path="/games/clock-angles" element={<ClockAngles />} />
-            <Route path="/games/fraction-visualizer" element={<FractionVisualizer />} />
-
-            {/* Payment & Store Routes */}
-            <Route path="/donate" element={<Donate />} />
-            {/* <Route path="/store" element={<Store />} /> */}
-            <Route path="/payment/success" element={<PaymentStatus />} />
-            <Route path="/payment/pending" element={<PaymentStatus />} />
-            <Route path="/payment/failed" element={<PaymentStatus />} />
-
-            {/* Notes Routes */}
-            <Route path="/notes" element={<Notes />} />
-
-            {/* General Paper Notes */}
-            <Route path="/notes/general-paper" element={<GeneralPaperNotes />} />
-            <Route path="/notes/general-paper/:subjectId" element={<GPSubjectNotes />} />
-            <Route path="/notes/general-paper/:subjectId/:unitId" element={<GPUnitNotes />} />
-
-            {/* English Language Notes */}
-            <Route path="/notes/english-language" element={<EnglishLanguageNotes />} />
-            <Route path="/notes/english-language/:subjectId" element={<ELSubjectNotes />} />
-            <Route path="/notes/english-language/:subjectId/:unitId" element={<ELUnitNotes />} />
-
-            {/* Quantitative Aptitude Notes */}
-            <Route path="/notes/quantitative" element={<QuantitativeNotes />} />
-            <Route path="/notes/quantitative/:subjectId" element={<QASubjectNotes />} />
-            <Route path="/notes/quantitative/:subjectId/:unitId" element={<QAUnitNotes />} />
-
-            {/* Verbal Aptitude Notes */}
-            <Route path="/notes/verbal" element={<VerbalNotes />} />
-            <Route path="/notes/verbal/:subjectId" element={<VASubjectNotes />} />
-            <Route path="/notes/verbal/:subjectId/:unitId" element={<VAUnitNotes />} />
-
-            {/* Mathematics Notes */}
-            <Route path="/notes/mathematics" element={<MathNotes />} />
-            <Route path="/notes/mathematics/:subjectId" element={<MathSubjectNotes />} />
-            <Route path="/notes/mathematics/:subjectId/:unitId" element={<MathUnitNotes />} />
-          </Routes>
-        </main>
-        <Footer />
-        <MascotHelper />
-      </div>
+      <AppContent />
     </Router>
   );
 }

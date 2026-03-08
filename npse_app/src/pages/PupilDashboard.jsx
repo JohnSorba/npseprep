@@ -44,15 +44,55 @@ const SUBJECTS_MAP = {
     completion: 30,
     resumeTopic: 'Analogies',
   },
-  'general': {
-    id: 'general',
-    name: 'General Paper',
-    subtitle: 'Explore knowledge about Sierra Leone, Africa, and the world.',
+  'social-studies': {
+    id: 'social-studies',
+    name: 'Social Studies',
+    subtitle: 'History, geography, and citizenship for Sierra Leone.',
     icon: '🌍',
     color: '#ec4899',
     bgColor: '#fce7f3',
+    completion: 35,
+    resumeTopic: 'Sierra Leone History',
+  },
+  'science': {
+    id: 'science',
+    name: 'Integrated Science',
+    subtitle: 'Life, physical, and environmental science basics.',
+    icon: '🔬',
+    color: '#0ea5e9',
+    bgColor: '#e0f2fe',
     completion: 20,
-    resumeTopic: 'Food & Nutrition',
+    resumeTopic: 'Human Systems',
+  },
+  'health-ed': {
+    id: 'health-ed',
+    name: 'Health Education',
+    subtitle: 'Personal health, hygiene, and community wellness.',
+    icon: '🏥',
+    color: '#10b981',
+    bgColor: '#ecfdf5',
+    completion: 40,
+    resumeTopic: 'Balanced Diets',
+  },
+  'home-economics': {
+    id: 'home-economics',
+    name: 'Home Economics',
+    subtitle: 'Managing resources and learning essential life skills.',
+    icon: '🍳',
+    color: '#f59e0b',
+    bgColor: '#fffbeb',
+    completion: 15,
+    resumeTopic: 'Home Management',
+  },
+  'ag-science': {
+    id: 'ag-science',
+    name: 'Agricultural Science',
+    subtitle: 'The foundation of food supply and farming in Sierra Leone.',
+    icon: '🌱',
+    color: '#84cc16',
+    bgColor: '#f7fee7',
+    completion: 10,
+    resumeTopic: 'Farm Tools',
   },
 };
 
@@ -93,17 +133,42 @@ const TOPICS_MAP = {
     { id: 6, title: 'Word Patterns', status: 'locked', notesStatus: 'Notes Unread', quizStatus: 'Locked', difficulty: 'Intermediate' },
     { id: 7, title: 'Alphabetical Position', status: 'locked', notesStatus: 'Notes Unread', quizStatus: 'Locked', difficulty: 'Basics' },
   ],
-  'general': [
-    { id: 1, title: 'Food & Nutrition', status: 'mastered', notesStatus: 'Notes Read', quizStatus: 'Score: 90%', difficulty: 'Basics' },
-    { id: 2, title: 'Family Life Education', status: 'mastered', notesStatus: 'Notes Read', quizStatus: 'Score: 82%', difficulty: 'Basics' },
-    { id: 3, title: 'Accidents & First Aid', status: 'in-progress', notesStatus: 'Reading…', quizStatus: 'Quiz Pending', difficulty: 'Intermediate' },
-    { id: 4, title: 'The Human Body', status: 'locked', notesStatus: 'Notes Unread', quizStatus: 'Locked', difficulty: 'Intermediate' },
-    { id: 5, title: 'Environmental Health', status: 'locked', notesStatus: 'Notes Unread', quizStatus: 'Locked', difficulty: 'Intermediate' },
-    { id: 6, title: 'Soil Science & Crops', status: 'locked', notesStatus: 'Notes Unread', quizStatus: 'Locked', difficulty: 'Intermediate' },
-    { id: 7, title: 'National Symbols', status: 'locked', notesStatus: 'Notes Unread', quizStatus: 'Locked', difficulty: 'Basics' },
-    { id: 8, title: 'Citizenship & Ethics', status: 'locked', notesStatus: 'Notes Unread', quizStatus: 'Locked', difficulty: 'Exam Ready (Hard)', difficultyClass: 'difficulty--hard' },
-    { id: 9, title: 'Local Governance', status: 'locked', notesStatus: 'Notes Unread', quizStatus: 'Locked', difficulty: 'Intermediate' },
-    { id: 10, title: 'Drug Abuse Awareness', status: 'locked', notesStatus: 'Notes Unread', quizStatus: 'Locked', difficulty: 'Basics' },
+  'social-studies': [
+    { id: 1, title: 'Sierra Leone: Geography', status: 'mastered', notesStatus: 'Read', quizStatus: '92%', resources: 3, worksheets: 2, difficulty: 'Basics' },
+    { id: 2, title: 'History of Independence', status: 'mastered', notesStatus: 'Read', quizStatus: '85%', resources: 4, worksheets: 1, difficulty: 'Intermediate' },
+    { id: 3, title: 'National Symbols & Flag', status: 'in-progress', notesStatus: 'Reading…', quizStatus: 'Pending', resources: 2, worksheets: 1, difficulty: 'Basics' },
+    { id: 4, title: 'Civic Responsibilities', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 5, worksheets: 2, difficulty: 'Intermediate' },
+    { id: 5, title: 'Governance & Leadership', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 3, worksheets: 1, difficulty: 'Hard' },
+    { id: 6, title: 'Regional Cooperation (MRU)', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 2, worksheets: 1, difficulty: 'Hard' },
+  ],
+  'science': [
+    { id: 1, title: 'The Human Body Systems', status: 'mastered', notesStatus: 'Read', quizStatus: '88%', resources: 6, worksheets: 3, difficulty: 'Intermediate' },
+    { id: 2, title: 'Plant & Animal Life', status: 'in-progress', notesStatus: 'Reading…', quizStatus: 'Pending', resources: 4, worksheets: 2, difficulty: 'Basics' },
+    { id: 3, title: 'Matter & Properties', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 3, worksheets: 1, difficulty: 'Intermediate' },
+    { id: 4, title: 'Work, Energy & Power', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 5, worksheets: 2, difficulty: 'Hard' },
+    { id: 5, title: 'Atmosphere & Weather', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 3, worksheets: 1, difficulty: 'Basics' },
+    { id: 6, title: 'Rocks & Minerals', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 2, worksheets: 1, difficulty: 'Intermediate' },
+  ],
+  'health-ed': [
+    { id: 1, title: 'Personal Hygiene', status: 'mastered', notesStatus: 'Read', quizStatus: '95%', resources: 4, worksheets: 2, difficulty: 'Basics' },
+    { id: 2, title: 'Nutrition & Balanced Diet', status: 'mastered', notesStatus: 'Read', quizStatus: '88%', resources: 5, worksheets: 3, difficulty: 'Intermediate' },
+    { id: 3, title: 'Communicable Diseases', status: 'in-progress', notesStatus: 'Reading…', quizStatus: 'Pending', resources: 6, worksheets: 2, difficulty: 'Hard' },
+    { id: 4, title: 'First Aid Procedures', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 3, worksheets: 1, difficulty: 'Intermediate' },
+    { id: 5, title: 'Safety in the Home', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 2, worksheets: 1, difficulty: 'Basics' },
+  ],
+  'home-economics': [
+    { id: 1, title: 'The Family & Home', status: 'mastered', notesStatus: 'Read', quizStatus: '90%', resources: 3, worksheets: 1, difficulty: 'Basics' },
+    { id: 2, title: 'Home Management Skills', status: 'in-progress', notesStatus: 'Reading…', quizStatus: 'Pending', resources: 4, worksheets: 2, difficulty: 'Intermediate' },
+    { id: 3, title: 'Clothing & Textiles', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 5, worksheets: 3, difficulty: 'Hard' },
+    { id: 4, title: 'Principles of Food Prep', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 6, worksheets: 2, difficulty: 'Intermediate' },
+    { id: 5, title: 'Consumer Education', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 3, worksheets: 1, difficulty: 'Hard' },
+  ],
+  'ag-science': [
+    { id: 1, title: 'Importance of Agriculture', status: 'in-progress', notesStatus: 'Reading…', quizStatus: 'Pending', resources: 3, worksheets: 1, difficulty: 'Basics' },
+    { id: 2, title: 'Garden Tools & Storage', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 4, worksheets: 2, difficulty: 'Basics' },
+    { id: 3, title: 'Soil Fertility & Erosion', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 5, worksheets: 2, difficulty: 'Intermediate' },
+    { id: 4, title: 'Crop Maintenance', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 3, worksheets: 1, difficulty: 'Intermediate' },
+    { id: 5, title: 'Livestock Care', status: 'locked', notesStatus: 'Unread', quizStatus: 'Locked', resources: 2, worksheets: 1, difficulty: 'Hard' },
   ],
 };
 
@@ -112,7 +177,11 @@ const PAPERS_MAP = {
   'mathematics': 'Mathematics Paper I & II',
   'quantitative': 'Quantitative Aptitude Paper',
   'verbal': 'Verbal Aptitude Paper',
-  'general': 'General Paper I & II',
+  'social-studies': 'General Paper (Social Studies)',
+  'science': 'General Paper (Integrated Science)',
+  'health-ed': 'General Paper (Health Education)',
+  'home-economics': 'General Paper (Home Economics)',
+  'ag-science': 'General Paper (Ag Science)',
 };
 
 const LEADERBOARD = [
@@ -129,7 +198,11 @@ const STUDY_TIPS = {
   'mathematics': '"Write out each step of your working clearly. Examiners award marks for method, not just the final answer."',
   'quantitative': '"When you see a number sequence, calculate the differences between terms first — patterns often hide there."',
   'verbal': '"Group synonyms and antonyms by theme when revising — it is easier to remember words in clusters."',
-  'general': '"Connect facts to real life in Sierra Leone. Contextual memory makes recall much easier in an exam."',
+  'social-studies': '"Think about how your local community operates. Connecting these concepts to your daily life makes them much easier to remember during the exam."',
+  'science': '"Pay close attention to diagrams. In Integrated Science, being able to label systems or recognize plant parts is just as important as knowing the facts."',
+  'health-ed': '"Stay healthy while you study! Understanding hygiene isn\'t just for marks — it is a life skill. Link diseases to their causes for better recall."',
+  'home-economics': '"Imagine yourself managing a real home. Practical application of management and nutrition topics will clarify the theory."',
+  'ag-science': '"Visualize a farm in Sierra Leone. Identifying tools and understanding soil types through mental images helps you understand the foundation of our agriculture."',
 };
 
 
@@ -288,11 +361,21 @@ const PupilDashboard = () => {
                       </div>
                       <div className="pd-topic-row__meta">
                         <span className="pd-meta-item">
-                          <span className="pd-meta-item__icon">📄</span> {topic.notesStatus}
+                          <span className="pd-meta-item__icon">📖</span> {topic.notesStatus}
                         </span>
                         <span className="pd-meta-item">
                           <span className="pd-meta-item__icon">🎯</span> {topic.quizStatus}
                         </span>
+                        {topic.resources > 0 && (
+                          <span className="pd-meta-item">
+                            <span className="pd-meta-item__icon">📎</span> {topic.resources} Resources
+                          </span>
+                        )}
+                        {topic.worksheets > 0 && (
+                          <span className="pd-meta-item">
+                            <span className="pd-meta-item__icon">✏️</span> {topic.worksheets} Worksheets
+                          </span>
+                        )}
                         <span className={`pd-meta-item pd-meta-difficulty ${topic.difficultyClass || ''}`}>
                           <span className="pd-meta-item__icon">📶</span> {topic.difficulty}
                         </span>
