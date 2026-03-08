@@ -11,6 +11,7 @@
   --color-green: #1B8A5A;
   --color-green-hover: #167a4e;
   --color-blue: #1E6FB8;
+  --color-skyblue: #39C1D7;
 
   /* ── Neutral System ── */
   --color-bg: #F7F8FB;
@@ -6752,7 +6753,7 @@ p {
    PAGE HERO (sub-page header — navy background)
    ───────────────────────────────────────────────────────── */
 .page-hero {
-  background: var(--color-navy);
+  background: var(--color-skyblue);
   padding: clamp(var(--space-16), 10vw, 120px) 0 clamp(var(--space-12), 8vw, 80px);
   text-align: center;
   position: relative;

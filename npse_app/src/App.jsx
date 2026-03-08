@@ -20,6 +20,9 @@ import Donate from './pages/Donate';
 // import Store from './pages/Store';
 import PaymentStatus from './pages/PaymentStatus';
 import Dashboard from './pages/Dashboard';
+import PupilDashboard from './pages/PupilDashboard';
+import PupilHome from './pages/PupilHome';
+import ParentDashboard from './pages/ParentDashboard';
 import AdminPanel from './pages/AdminPanel';
 
 // Auth pages
@@ -77,6 +80,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/pupil" element={<PupilHome />} />
+            <Route path="/dashboard/pupil/:subjectId" element={<PupilDashboard />} />
+            <Route path="/dashboard/parent" element={<ParentDashboard />} />
             <Route path="/admin" element={<AdminPanel />} />
 
             {/* Core Routes */}
