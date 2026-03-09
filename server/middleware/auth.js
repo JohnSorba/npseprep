@@ -1,59 +1,69 @@
-/**
- * Authentication & Authorization Middleware
- */
+// src/middleware/auth.js
+// Verifies the JWT access token on protected routes.
+// Sets req.user = { id, username } on success.
 
 const jwt = require('jsonwebtoken');
+const config = require('../config');
+const db = require('../db');
 
-/**
- * Verify JWT token from Authorization header.
- * Attaches `req.user` with { id, role }.
- */
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1]; // Bearer <token>
+function requireAuth(req, res, next) {
+  const authHeader = req.headers.authorization;
 
-    if (!token) {
-        return res.status(401).json({ error: 'Access denied. No token provided.' });
+  if (!authHeader?.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Missing or invalid Authorization header.' });
+  }
+
+  const token = authHeader.split(' ')[1];
+
+  try {
+    const payload = jwt.verify(token, config.jwt.secret);
+    req.user = { id: payload.sub, username: payload.username };
+    next();
+  } catch (err) {
+    if (err.name === 'TokenExpiredError') {
+      // Client should catch TOKEN_EXPIRED and call POST /api/auth/refresh
+      return res.status(401).json({ error: 'TOKEN_EXPIRED' });
+    }
+    return res.status(401).json({ error: 'Invalid token.' });
+  }
+}
+
+function optionalAuth(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader?.startsWith('Bearer ')) return next();
+
+  try {
+    const payload = jwt.verify(authHeader.split(' ')[1], config.jwt.secret);
+    req.user = { id: payload.sub, username: payload.username };
+  } catch (err) {
+    // Ignore errors for optional auth
+  }
+  next();
+}
+
+function requireRole(role) {
+  return async (req, res, next) => {
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ error: 'Unauthorized' });
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded; // { id, role, iat, exp }
-        next();
+      const result = await db.query('SELECT role FROM users WHERE id = $1', [req.user.id]);
+      if (result.rows.length === 0 || result.rows[0].role !== role) {
+        return res.status(403).json({ error: 'Forbidden: Insufficient permissions.' });
+      }
+      req.user.role = result.rows[0].role;
+      next();
     } catch (err) {
-        return res.status(403).json({ error: 'Invalid or expired token.' });
+      console.error('[auth] requireRole error:', err);
+      res.status(500).json({ error: 'Internal server error while checking permissions.' });
     }
+  };
 }
 
-/**
- * Optional auth — sets req.user if token present, but does not block.
- */
-function optionalAuth(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-
-    if (token) {
-        try {
-            req.user = jwt.verify(token, process.env.JWT_SECRET);
-        } catch {
-            // Token invalid — proceed without user
-        }
-    }
-
-    next();
-}
-
-/**
- * Require a specific role.
- * Must be used AFTER authenticateToken.
- */
-function requireRole(...roles) {
-    return (req, res, next) => {
-        if (!req.user || !roles.includes(req.user.role)) {
-            return res.status(403).json({ error: 'Insufficient permissions.' });
-        }
-        next();
-    };
-}
-
-module.exports = { authenticateToken, optionalAuth, requireRole };
+module.exports = {
+  requireAuth,
+  authenticateToken: requireAuth, // Alias for backward compatibility 
+  optionalAuth,
+  requireRole
+};

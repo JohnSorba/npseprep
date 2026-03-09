@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const app = express();
 require('dotenv').config();
 
@@ -27,6 +28,7 @@ app.use('/api/v1/webhooks', webhookRoutes);
 
 // Parse JSON for all other routes
 app.use(express.json());
+app.use(cookieParser());
 
 // ──── API Routes ──────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
